@@ -1,0 +1,214 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Inter", sans-serif;
+}
+
+body {
+  background: #f4f6f9;
+  color: #222;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+/* HEADER */
+header {
+  background: #4a90e2;
+  color: white;
+  padding: 15px 30px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.logo {
+  font-size: 1.4rem;
+  font-weight: 600;
+}
+
+.header-right {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+nav {
+  display: flex;
+  gap: 20px;
+}
+
+header button {
+  background: none;
+  border: none;
+  color: white;
+  font-size: 1rem;
+  cursor: pointer;
+}
+
+/* STREAK BADGE */
+.streak-badge {
+  background: rgba(255, 255, 255, 0.25);
+  padding: 6px 14px;
+  border-radius: 20px;
+  font-weight: 600;
+}
+
+/* PAGES */
+.page {
+  display: none;
+  padding: 30px;
+  text-align: center;
+}
+
+.page.active {
+  display: block;
+}
+
+.hero {
+  margin-top: 80px;
+}
+
+.hero button {
+  margin-top: 20px;
+  padding: 12px 30px;
+  border: none;
+  background: #4a90e2;
+  color: white;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+/* TEST AREA */
+.settings {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+}
+
+#typing-area {
+  border: 2px solid #333;
+  background: white;
+  min-height: 220px;
+  padding: 20px;
+  margin: 20px auto;
+  max-width: 900px;
+  font-size: 1.2rem;
+  border-radius: 8px;
+}
+
+#typing-area span.correct {
+  color: green;
+}
+#typing-area span.incorrect {
+  color: red;
+}
+#typing-area span.active {
+  border-left: 2px solid #4a90e2;
+}
+
+.stats {
+  display: flex;
+  justify-content: center;
+  gap: 25px;
+  flex-wrap: wrap;
+}
+
+/* PROGRESS BAR */
+.progress-bar {
+  width: 90%;
+  max-width: 900px;
+  height: 8px;
+  background: #ddd;
+  margin: auto;
+  border-radius: 10px;
+}
+
+.progress-bar div {
+  height: 100%;
+  width: 0%;
+  background: #4a90e2;
+}
+
+/* PROFILE */
+.profile-box p {
+  font-size: 1.1rem;
+  margin: 6px 0;
+}
+
+/* TABLE */
+table {
+  margin: auto;
+  margin-top: 20px;
+  border-collapse: collapse;
+  width: 90%;
+  max-width: 800px;
+}
+
+th,
+td {
+  border: 1px solid #ccc;
+  padding: 8px;
+}
+
+/* MODAL */
+.modal {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.6);
+  display: none;
+  justify-content: center;
+  align-items: center;
+}
+
+.modal-content {
+  background: white;
+  padding: 25px;
+  border-radius: 10px;
+  width: 90%;
+  max-width: 550px;
+}
+
+.modal-content canvas {
+  margin: 10px 0;
+  border: 1px solid #ccc;
+}
+
+/* FOOTER */
+footer {
+  background: #222;
+  color: white;
+  padding: 10px;
+  text-align: center;
+  margin-top: auto;
+}
+
+/* DARK MODE */
+body.dark {
+  background: #1e1e1e;
+  color: #ddd;
+}
+
+body.dark header {
+  background: #2a2a2a;
+}
+
+body.dark footer {
+  background: #111;
+}
+
+body.dark #typing-area {
+  background: #2e2e2e;
+  border-color: #aaa;
+  color: #fff;
+}
+
+body.dark .modal-content {
+  background: #2e2e2e;
+  color: #fff;
+}
+
+body.dark .streak-badge {
+  background: rgba(255, 255, 255, 0.15);
+}
