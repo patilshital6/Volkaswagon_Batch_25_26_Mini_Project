@@ -1,0 +1,46 @@
+body {
+    background: #f4f6f9;
+    font-family: 'Segoe UI', sans-serif;
+}
+
+/* Auth Pages */
+.auth-bg {
+    background: linear-gradient(120deg, #1d2671, #c33764);
+    height: 100vh;
+}
+
+.auth-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+}
+
+.auth-card {
+    background: white;
+    padding: 30px;
+    border-radius: 12px;
+    width: 380px;
+}
+
+/* Dashboard */
+.dashboard-hero {
+    background: linear-gradient(120deg, #007bff, #00c6ff);
+    padding: 40px 0;
+}
+
+.stat-card {
+    padding: 25px;
+    border-radius: 12px;
+    color: white;
+    text-align: center;
+}
+
+.stat-card i {
+    font-size: 30px;
+    margin-bottom: 10px;
+}
+
+.blue { background: #007bff; }
+.orange { background: #fd7e14; }
+.green { background: #28a745; }
