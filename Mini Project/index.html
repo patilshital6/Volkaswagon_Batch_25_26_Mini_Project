@@ -1,0 +1,322 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Quiz Platform</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <!-- <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Poppins&display=swap"
+      rel="stylesheet"
+    /> -->
+    <style>
+      :root {
+        --bg: #0b1020;
+        --card: #121a35;
+        --accent: #6cf2c2;
+        --accent2: #7aa2ff;
+        --text: #e6e9f2;
+        --muted: #9aa3c7;
+        --danger: #ff6b6b;
+        --success: #4cd964;
+      }
+
+      
+      * {
+        box-sizing: border-box;
+      }
+
+      body {
+        margin: 0;
+        font-family: "Inter", sans-serif;
+        background: radial-gradient(circle at top, #121a35, var(--bg));
+        color: var(--text);
+        min-height: 100vh;
+      }
+
+      header {
+        padding: 20px 40px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+
+      header h1 {
+        font-size: 24px;
+        font-weight: 700;
+        background: linear-gradient(90deg, var(--accent), var(--accent2));
+        background-clip: text;
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+      }
+
+      .container {
+        max-width: 1100px;
+        margin: auto;
+        padding: 20px;
+      }
+
+      .card {
+        background: linear-gradient(180deg, #141d3f, var(--card));
+        border-radius: 16px;
+        padding: 24px;
+        box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+        margin-bottom: 24px;
+        animation: fadeIn 0.5s ease;
+      }
+
+      @keyframes fadeIn {
+        from {
+          opacity: 0;
+          transform: translateY(10px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      label {
+        font-size: 13px;
+        color: var(--muted);
+        margin-bottom: 6px;
+        display: block;
+      }
+
+      input,
+      select {
+        width: 100%;
+        padding: 12px;
+        border-radius: 10px;
+        border: none;
+        background: #0f1633;
+        color: var(--text);
+        outline: none;
+        margin-bottom: 14px;
+      }
+
+      button {
+        background: linear-gradient(90deg, var(--accent), var(--accent2));
+        border: none;
+        color: #081018;
+        padding: 14px 20px;
+        border-radius: 12px;
+        font-weight: 700;
+        cursor: pointer;
+      }
+
+      .hidden {
+        display: none;
+      }
+
+      .options {
+        display: grid;
+        gap: 12px;
+      }
+
+      .option {
+        padding: 14px;
+        border-radius: 12px;
+        background: #0f1633;
+        cursor: pointer;
+        border: 2px solid transparent;
+      }
+
+      .option.correct {
+        background: rgba(76, 217, 100, 0.15);
+        border-color: var(--success);
+      }
+
+      .option.wrong {
+        background: rgba(255, 107, 107, 0.15);
+        border-color: var(--danger);
+      }
+
+      .result {
+        text-align: center;
+      }
+
+      .score {
+        font-size: 40px;
+        font-weight: 700;
+        background: linear-gradient(90deg, var(--accent), var(--accent2));
+        background-clip: text;
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+      }
+
+      footer {
+        text-align: center;
+        padding: 20px;
+        color: var(--muted);
+        font-size: 13px;
+      }
+    </style>
+  </head>
+
+  <body>
+    <header>
+      <h1>⚡ Quiz Platform</h1>
+      <div id="userInfo">Skill • Score • Improve</div>
+    </header>
+
+    <div class="container">
+      <!-- LOGIN -->
+      <div class="card" id="loginCard">
+        <h2>Login to Continue</h2>
+
+        <label>Name</label>
+        <input type="text" id="userName" placeholder="Enter your name" />
+
+        <label>Email</label>
+        <input type="email" id="userEmail" placeholder="Enter your email" />
+
+        <button onclick="login()">🔐 Login</button>
+      </div>
+
+      <!-- SETUP -->
+      <div class="card hidden" id="setupCard">
+        <h2>Start Quiz</h2>
+
+        <label>Category</label>
+        <select id="category">
+          <option value="">All</option>
+          <option>Linux</option>
+          <option>DevOps</option>
+          <option>Docker</option>
+          <option>SQL</option>
+          <option>Cloud</option>
+        </select>
+
+        <label>Difficulty</label>
+        <select id="difficulty">
+          <option value="">Any</option>
+          <option>Easy</option>
+          <option>Medium</option>
+          <option>Hard</option>
+        </select>
+
+        <button onclick="startQuiz()">🚀 Start Quiz</button>
+      </div>
+
+      <!-- QUIZ -->
+      <div class="card hidden" id="quizCard">
+        <div id="qCounter"></div>
+        <h3 id="questionText"></h3>
+        <div class="options" id="options"></div>
+        <button onclick="nextQuestion()">Next</button>
+      </div>
+
+      <!-- RESULT -->
+      <div class="card hidden result" id="resultCard">
+        <h2>Quiz Result</h2>
+        <div class="score" id="scoreText"></div>
+        <p id="analysis"></p>
+        <button onclick="location.reload()">🔁 Retry</button>
+      </div>
+    </div>
+
+    <footer>Made with passion for learning ❤️</footer>
+
+    <script>
+      let questions = [];
+      let index = 0;
+      let score = 0;
+
+      function login() {
+        const name = userName.value.trim();
+        const email = userEmail.value.trim();
+
+        if (!name || !email) {
+          alert("Name and Email required");
+          return;
+        }
+
+        sessionStorage.setItem("quizUser", JSON.stringify({ name, email }));
+        userInfo.innerText = `Welcome, ${name}`;
+
+        loginCard.classList.add("hidden");
+        setupCard.classList.remove("hidden");
+      }
+
+      async function startQuiz() {
+        const API_KEY = "oEFwoXuyzjqGtyYBhnoyADrVydAPeRlevwQMIJGd";
+        if (!API_KEY) {
+          alert("Add API Key in code");
+          return;
+        }
+
+        let url = "https://quizapi.io/api/v1/questions?limit=5";
+        if (category.value) url += `&category=${category.value}`;
+        if (difficulty.value) url += `&difficulty=${difficulty.value}`;
+
+        const res = await fetch(url, {
+          headers: { "X-Api-Key": API_KEY },
+        });
+
+        questions = await res.json();
+        setupCard.classList.add("hidden");
+        quizCard.classList.remove("hidden");
+        loadQuestion();
+      }
+
+      function loadQuestion() {
+        const q = questions[index];
+        qCounter.innerText = `Question ${index + 1} / ${questions.length}`;
+        questionText.innerText = q.question;
+        options.innerHTML = "";
+
+        Object.entries(q.answers).forEach(([k, v]) => {
+          if (!v) return;
+          const div = document.createElement("div");
+          div.className = "option";
+          div.innerText = v;
+          div.onclick = () => selectAnswer(div, k, q);
+          options.appendChild(div);
+        });
+      }
+
+      function selectAnswer(el, key, q) {
+        [...options.children].forEach((o) => (o.onclick = null));
+
+        const correct = Object.keys(q.correct_answers)
+          .find((k) => q.correct_answers[k] === "true")
+          .replace("_correct", "");
+
+        if (key === correct) {
+          el.classList.add("correct");
+          score++;
+        } else {
+          el.classList.add("wrong");
+          [...options.children].forEach((o) => {
+            if (o.innerText === q.answers[correct]) {
+              o.classList.add("correct");
+            }
+          });
+        }
+      }
+
+      function nextQuestion() {
+        index++;
+        if (index >= questions.length) showResult();
+        else loadQuestion();
+      }
+
+      function showResult() {
+        quizCard.classList.add("hidden");
+        resultCard.classList.remove("hidden");
+        scoreText.innerText = `${score} / ${questions.length}`;
+        analysis.innerText =
+          score >= questions.length / 2
+            ? "Excellent performance!"
+            : "Keep practicing and retry.";
+      }
+    </script>
+  </body>
+</html>
