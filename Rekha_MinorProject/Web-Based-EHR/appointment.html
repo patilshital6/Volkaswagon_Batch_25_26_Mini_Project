@@ -1,0 +1,204 @@
+<!doctype html>
+<html>
+  <head>
+    <title>City Hospital | Appointment</title>
+
+    <!-- Web Fonts -->
+    <link
+      rel="stylesheet"
+      href="//fonts.googleapis.com/css?family=Open+Sans:400,300,600&amp;subset=cyrillic,latin"
+    />
+
+    <!-- CSS -->
+    <link
+      rel="stylesheet"
+      href="assets/plugins/bootstrap/css/bootstrap.min.css"
+    />
+    <link rel="stylesheet" href="assets/css/style.css" />
+    <link rel="stylesheet" href="assets/css/header.css" />
+    <link rel="stylesheet" href="assets/css/footer.css" />
+    <link rel="stylesheet" href="assets/plugins/line-icons-pro/styles.css" />
+    <link rel="stylesheet" href="assets/plugins/line-icons/line-icons.css" />
+    <link
+      rel="stylesheet"
+      href="assets/plugins/font-awesome/css/font-awesome.min.css"
+    />
+    <link
+      rel="stylesheet"
+      href="assets/plugins/sky-forms-pro/skyforms/css/sky-forms.css"
+    />
+    <link
+      rel="stylesheet"
+      href="assets/plugins/sky-forms-pro/skyforms/custom/custom-sky-forms.css"
+    />
+    <link rel="stylesheet" href="assets/css/custom.css" />
+  </head>
+
+  <body>
+    <div id="header"></div>
+
+    <div class="wrapper">
+      <div class="container content">
+        <div class="row" style="margin-bottom: 30px">
+          <!-- Appointment Form -->
+          <div class="col-md-9">
+            <div class="headline"><h2>Appointment Form</h2></div>
+
+            <form
+              onsubmit="
+                showMsg(0);
+                return false;
+              "
+              method="post"
+              class="sky-form sky-changes-3"
+            >
+              <fieldset>
+                <div class="row">
+                  <section class="col col-6">
+                    <label class="label">Name</label>
+                    <label class="input">
+                      <i class="icon-append fa fa-user"></i>
+                      <input type="text" required />
+                    </label>
+                  </section>
+
+                  <section class="col col-6">
+                    <label class="label">E-mail</label>
+                    <label class="input">
+                      <i class="icon-append fa fa-envelope-o"></i>
+                      <input type="email" required />
+                    </label>
+                  </section>
+                </div>
+
+                <section>
+                  <label class="label">Purpose Of Appointment</label>
+                  <label class="input">
+                    <i class="icon-append fa fa-tag"></i>
+                    <input type="text" required />
+                  </label>
+                </section>
+
+                <section>
+                  <label class="label">Mobile Number</label>
+                  <label class="input">
+                    <i class="icon-append fa fa-phone"></i>
+                    <input type="text" required />
+                  </label>
+                </section>
+
+                <section>
+                  <label class="select">
+                    <select required>
+                      <option disabled selected>Select Department</option>
+                      <option>Cardiology</option>
+                      <option>Dermatology and Cosmetology</option>
+                      <option>General Surgery</option>
+                      <option>Health Checkup Packages</option>
+                      <option>Neurology</option>
+                    </select>
+                    <i></i>
+                  </label>
+                </section>
+
+                <div class="row">
+                  <section class="col col-6">
+                    <label>Select Date</label>
+                    <label class="input">
+                      <i class="icon-append fa fa-calendar"></i>
+                      <input type="date" required />
+                    </label>
+                  </section>
+
+                  <section class="col col-6">
+                    <label>Select Time</label>
+                    <label class="select">
+                      <select required>
+                        <option disabled selected>Select Time</option>
+                        <option>8 AM - 10 AM</option>
+                        <option>10 AM - 12 PM</option>
+                        <option>12 PM - 2 PM</option>
+                        <option>2 PM - 4 PM</option>
+                        <option>4 PM - 6 PM</option>
+                        <option>6 PM - 8 PM</option>
+                        <option>8 PM - 10 PM</option>
+                      </select>
+                      <i></i>
+                    </label>
+                  </section>
+                </div>
+
+                <div
+                  class="alert alert-success successBox"
+                  style="display: none"
+                >
+                  <button type="button" class="close" onclick="showMsg(1)">
+                    ×
+                  </button>
+                  <strong>Success!</strong> Your Appointment has been booked
+                  successfully.
+                </div>
+              </fieldset>
+
+              <footer>
+                <button type="submit" class="btn-u">Book Appointment</button>
+              </footer>
+            </form>
+          </div>
+
+          <!-- Side Panel -->
+          <div class="col-md-3" style="margin-top: 56px">
+            <div class="headline"><h2>Appointment Notes</h2></div>
+            <p>
+              You can book appointments between <strong>8 AM to 10 PM.</strong>
+            </p>
+            <p>Emergency ambulance is available 24/7.</p>
+
+            <div class="headline" style="margin-top: 20px">
+              <h2>Business Hours</h2>
+            </div>
+
+            <ul class="list-unstyled">
+              <li><strong>Mon-Sat:</strong> 24/7</li>
+              <li><strong>Sunday:</strong> 4 AM - 11 PM</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div id="footer"></div>
+
+    <!-- Header & Footer Loader -->
+    <script>
+      fetch("header.html")
+        .then((res) => res.text())
+        .then((data) => (document.getElementById("header").innerHTML = data));
+
+      fetch("footer.html")
+        .then((res) => res.text())
+        .then((data) => (document.getElementById("footer").innerHTML = data));
+    </script>
+
+    <script>
+      function showMsg(flag) {
+        if (flag === 0) {
+          document.querySelector(".successBox").style.display = "block";
+        } else {
+          document.querySelector(".successBox").style.display = "none";
+        }
+      }
+    </script>
+    <script>
+      function toggleMenu() {
+        var menu = document.getElementById("mobileMenu");
+
+        if (menu.style.display === "none" || menu.style.display === "") {
+          menu.style.display = "block";
+        } else {
+          menu.style.display = "none";
+        }
+      }
+    </script>
+  </body>
+</html>

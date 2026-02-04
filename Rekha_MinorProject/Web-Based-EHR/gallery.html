@@ -1,0 +1,144 @@
+<!doctype html>
+<html>
+  <head>
+    <title>City Hospital | Gallery</title>
+
+    <!-- CSS -->
+    <link
+      rel="stylesheet"
+      href="assets/plugins/bootstrap/css/bootstrap.min.css"
+    />
+    <link rel="stylesheet" href="assets/css/style.css" />
+    <link rel="stylesheet" href="assets/css/header.css" />
+    <link rel="stylesheet" href="assets/css/footer.css" />
+    <link rel="stylesheet" href="assets/plugins/line-icons-pro/styles.css" />
+    <link rel="stylesheet" href="assets/plugins/line-icons/line-icons.css" />
+    <link
+      rel="stylesheet"
+      href="assets/plugins/font-awesome/css/font-awesome.min.css"
+    />
+    <link
+      rel="stylesheet"
+      href="assets/plugins/cube-portfolio/css/cubeportfolio.min.css"
+    />
+    <link
+      rel="stylesheet"
+      href="assets/plugins/cube-portfolio/custom/custom-cubeportfolio.css"
+    />
+    <link rel="stylesheet" href="assets/css/custom.css" />
+  </head>
+
+  <body>
+    <!-- Header Load -->
+    <div id="header"></div>
+
+    <div class="wrapper">
+      <!-- Page Title -->
+      <div style="text-align: center; margin-top: 50px">
+        <h2>GALLERY</h2>
+      </div>
+
+      <!-- Gallery Section -->
+      <div
+        class="cube-portfolio container"
+        style="margin-top: 80px; margin-bottom: 60px"
+      >
+        <div id="grid-container" class="cbp-l-grid-agency">
+          <!-- Image 1 -->
+          <div class="cbp-item">
+            <a href="assets/img/gallery/room1.jpg" class="cbp-lightbox">
+              <img src="assets/img/gallery/room1.jpg" />
+            </a>
+            <div class="cbp-l-grid-agency-title">Rooms for Patients</div>
+          </div>
+
+          <!-- Image 2 -->
+          <div class="cbp-item">
+            <a href="assets/img/gallery/opd.jpg" class="cbp-lightbox">
+              <img src="assets/img/gallery/opd.jpg" />
+            </a>
+            <div class="cbp-l-grid-agency-title">OPD Area</div>
+          </div>
+
+          <!-- Image 3 -->
+          <div class="cbp-item">
+            <a href="assets/img/gallery/opd2.jpg" class="cbp-lightbox">
+              <img src="assets/img/gallery/opd2.jpg" />
+            </a>
+            <div class="cbp-l-grid-agency-title">OPD Area 2</div>
+          </div>
+
+          <!-- Image 4 -->
+          <div class="cbp-item">
+            <a href="assets/img/gallery/parking.jpg" class="cbp-lightbox">
+              <img src="assets/img/gallery/parking.jpg" />
+            </a>
+            <div class="cbp-l-grid-agency-title">Parking Area</div>
+          </div>
+
+          <!-- Image 5 -->
+          <div class="cbp-item">
+            <a href="assets/img/gallery/reception.jpg" class="cbp-lightbox">
+              <img src="assets/img/gallery/reception.jpg" />
+            </a>
+            <div class="cbp-l-grid-agency-title">Reception</div>
+          </div>
+
+          <!-- Image 6 -->
+          <div class="cbp-item">
+            <a href="assets/img/gallery/cath_lab.jpg" class="cbp-lightbox">
+              <img src="assets/img/gallery/cath_lab.jpg" />
+            </a>
+            <div class="cbp-l-grid-agency-title">Cath Laboratory</div>
+          </div>
+
+          <!-- Image 7 -->
+          <div class="cbp-item">
+            <a href="assets/img/gallery/platinum_wing.jpg" class="cbp-lightbox">
+              <img src="assets/img/gallery/platinum_wing.jpg" />
+            </a>
+            <div class="cbp-l-grid-agency-title">Platinum Wing</div>
+          </div>
+
+          <!-- Image 8 -->
+          <div class="cbp-item">
+            <a href="assets/img/gallery/Hospital.jpg" class="cbp-lightbox">
+              <img src="assets/img/gallery/Hospital.jpg" />
+            </a>
+            <div class="cbp-l-grid-agency-title">Hospital</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Footer Load -->
+    <div id="footer"></div>
+
+    <!-- Fetch Header & Footer -->
+    <script>
+      fetch("header.html")
+        .then((res) => res.text())
+        .then((data) => (document.getElementById("header").innerHTML = data));
+
+      fetch("footer.html")
+        .then((res) => res.text())
+        .then((data) => (document.getElementById("footer").innerHTML = data));
+    </script>
+
+    <!-- JS -->
+    <script src="assets/plugins/jquery/jquery.min.js"></script>
+    <script src="assets/plugins/cube-portfolio/js/jquery.cubeportfolio.min.js"></script>
+    <script src="assets/plugins/cube-portfolio/js/cube-portfolio-3.js"></script>
+    <script>
+      function toggleMenu() {
+        var menu = document.getElementById("mobileMenu");
+
+        if (menu.style.display === "none" || menu.style.display === "") {
+          menu.style.display = "block";
+        } else {
+          menu.style.display = "none";
+        }
+      }
+    </script>
+  </body>
+</html>

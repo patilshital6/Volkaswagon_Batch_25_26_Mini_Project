@@ -1,0 +1,174 @@
+<!doctype html>
+<html>
+  <head>
+    <title>City Hospital | Blog</title>
+
+    <!-- Web Fonts -->
+    <link
+      rel="stylesheet"
+      href="//fonts.googleapis.com/css?family=Open+Sans:400,300,600&amp;subset=cyrillic,latin"
+    />
+
+    <!-- CSS -->
+    <link
+      rel="stylesheet"
+      href="assets/plugins/bootstrap/css/bootstrap.min.css"
+    />
+    <link rel="stylesheet" href="assets/css/style.css" />
+    <link rel="stylesheet" href="assets/css/header.css" />
+    <link rel="stylesheet" href="assets/css/footer.css" />
+    <link rel="stylesheet" href="assets/plugins/line-icons-pro/styles.css" />
+    <link rel="stylesheet" href="assets/plugins/line-icons/line-icons.css" />
+    <link
+      rel="stylesheet"
+      href="assets/plugins/font-awesome/css/font-awesome.min.css"
+    />
+    <link rel="stylesheet" href="assets/css/blog_timeline.css" />
+    <link rel="stylesheet" href="assets/css/custom.css" />
+  </head>
+
+  <body>
+    <div id="header"></div>
+
+    <div class="wrapper">
+      <div style="text-align: center; margin-top: 50px; margin-bottom: 40px">
+        <h2>BLOGS</h2>
+      </div>
+
+      <div class="container content">
+        <ul class="timeline-v1">
+          <!-- Blog 1 -->
+          <li>
+            <div class="timeline-badge primary">
+              <i class="glyphicon glyphicon-record"></i>
+            </div>
+            <div class="timeline-panel">
+              <div class="timeline-heading">
+                <img
+                  class="img-responsive"
+                  src="assets/img/blogs/1.jpg"
+                  alt=""
+                />
+              </div>
+              <div class="timeline-body">
+                <h2>How to maintain bone and joint health during winters?</h2>
+                <p>
+                  Winter stiffness happens due to reduced Vitamin D absorption
+                  and restricted mobility.
+                </p>
+                <p>
+                  Tips: Balanced diet, Vitamin K/D/C intake, Exercise, Weight
+                  control.
+                </p>
+              </div>
+              <div class="timeline-footer">
+                <small>By Dr. Ramneek Mahajan | Dec 31, 2025</small>
+              </div>
+            </div>
+          </li>
+
+          <!-- Blog 2 -->
+          <li class="timeline-inverted">
+            <div class="timeline-badge primary">
+              <i class="glyphicon glyphicon-record"></i>
+            </div>
+            <div class="timeline-panel">
+              <div class="timeline-heading">
+                <img
+                  class="img-responsive"
+                  src="assets/img/blogs/2.jpg"
+                  alt=""
+                />
+              </div>
+              <div class="timeline-body">
+                <h2>Robot Assisted Kidney Transplant</h2>
+                <p>
+                  RAKT provides lesser pain, minimal scars, and faster recovery.
+                </p>
+              </div>
+              <div class="timeline-footer">
+                <small>By Dr. Anant Kumar | Dec 31, 2025</small>
+              </div>
+            </div>
+          </li>
+
+          <!-- Blog 3 -->
+          <li>
+            <div class="timeline-badge primary">
+              <i class="glyphicon glyphicon-record"></i>
+            </div>
+            <div class="timeline-panel">
+              <div class="timeline-heading">
+                <img
+                  class="img-responsive"
+                  src="assets/img/blogs/3.jpg"
+                  alt=""
+                />
+              </div>
+              <div class="timeline-body">
+                <h2>Body Weight - What you must know!</h2>
+                <p>
+                  Ideal body weight depends on age, height, muscle mass and
+                  gender.
+                </p>
+              </div>
+              <div class="timeline-footer">
+                <small>By Dr. Vandana Soni | Dec 31, 2025</small>
+              </div>
+            </div>
+          </li>
+
+          <!-- Blog 4 -->
+          <li class="timeline-inverted">
+            <div class="timeline-badge primary">
+              <i class="glyphicon glyphicon-record"></i>
+            </div>
+            <div class="timeline-panel">
+              <div class="timeline-heading">
+                <img
+                  class="img-responsive"
+                  src="assets/img/blogs/4.jpg"
+                  alt=""
+                />
+              </div>
+              <div class="timeline-body">
+                <h2>Importance of Sleep in Brain Health</h2>
+                <p>
+                  Sleep regulates hormones and neurotransmitters affecting mood
+                  and focus.
+                </p>
+              </div>
+              <div class="timeline-footer">
+                <small>By Dr. Manish Baijal | Dec 31, 2025</small>
+              </div>
+            </div>
+          </li>
+        </ul>
+      </div>
+    </div>
+
+    <div id="footer"></div>
+
+    <!-- Header & Footer Loader -->
+    <script>
+      fetch("header.html")
+        .then((res) => res.text())
+        .then((data) => (document.getElementById("header").innerHTML = data));
+
+      fetch("footer.html")
+        .then((res) => res.text())
+        .then((data) => (document.getElementById("footer").innerHTML = data));
+    </script>
+  </body>
+  <script>
+    function toggleMenu() {
+      var menu = document.getElementById("mobileMenu");
+
+      if (menu.style.display === "none" || menu.style.display === "") {
+        menu.style.display = "block";
+      } else {
+        menu.style.display = "none";
+      }
+    }
+  </script>
+</html>

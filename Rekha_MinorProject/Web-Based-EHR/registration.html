@@ -1,0 +1,148 @@
+<!doctype html>
+<html>
+  <head>
+    <title>City Hospital | Registration</title>
+
+    <!-- CSS -->
+    <link
+      rel="stylesheet"
+      href="assets/plugins/bootstrap/css/bootstrap.min.css"
+    />
+    <link rel="stylesheet" href="assets/css/style.css" />
+    <link rel="stylesheet" href="assets/css/header.css" />
+    <link rel="stylesheet" href="assets/css/footer.css" />
+    <link
+      rel="stylesheet"
+      href="assets/plugins/font-awesome/css/font-awesome.min.css"
+    />
+    <link rel="stylesheet" href="assets/css/custom.css" />
+  </head>
+
+  <body>
+    <!-- Header -->
+    <div id="header"></div>
+
+    <div class="wrapper">
+      <!-- Title -->
+      <div style="text-align: center; margin-top: 50px">
+        <h2>REGISTER</h2>
+      </div>
+
+      <!-- Registration Form -->
+      <div class="container content">
+        <div class="row">
+          <div class="col-md-6 col-md-offset-3">
+            <form class="reg-page">
+              <div class="reg-header">
+                <h2>Create Account</h2>
+                <p>
+                  Already registered?
+                  <a href="login.html" class="color-green">Login here</a>
+                </p>
+              </div>
+
+              <label>First Name</label>
+              <input id="firstName" type="text" class="form-control" required />
+
+              <label style="margin-top: 15px">Last Name</label>
+              <input id="lastName" type="text" class="form-control" required />
+
+              <label style="margin-top: 15px">Email</label>
+              <input id="email" type="email" class="form-control" required />
+
+              <div class="row" style="margin-top: 15px">
+                <div class="col-sm-6">
+                  <label>Password</label>
+                  <input
+                    id="password"
+                    type="password"
+                    class="form-control"
+                    required
+                  />
+                </div>
+                <div class="col-sm-6">
+                  <label>Confirm Password</label>
+                  <input
+                    id="confPassword"
+                    type="password"
+                    class="form-control"
+                    required
+                  />
+                </div>
+              </div>
+
+              <div
+                class="alert alert-success successBox"
+                style="display: none; margin-top: 15px"
+              >
+                <strong>Success!</strong> Registration completed.
+              </div>
+
+              <div style="margin-top: 20px">
+                <button id="submit" class="btn-u btn-block" type="button">
+                  Register
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Footer -->
+    <div id="footer"></div>
+
+    <!-- Load Header & Footer -->
+    <script>
+      fetch("header.html")
+        .then((res) => res.text())
+        .then((data) => (document.getElementById("header").innerHTML = data));
+
+      fetch("footer.html")
+        .then((res) => res.text())
+        .then((data) => (document.getElementById("footer").innerHTML = data));
+    </script>
+
+    <!-- Registration Logic -->
+    <script>
+      document.getElementById("submit").addEventListener("click", function () {
+        var firstName = document.getElementById("firstName").value;
+        var lastName = document.getElementById("lastName").value;
+        var email = document.getElementById("email").value;
+        var password = document.getElementById("password").value;
+        var confPassword = document.getElementById("confPassword").value;
+
+        if (password !== confPassword) {
+          alert("Passwords do not match!");
+          return;
+        }
+
+        var regValue = {
+          firstName: firstName,
+          lastName: lastName,
+          email: email,
+          password: password,
+        };
+
+        localStorage.setItem("regToken", JSON.stringify(regValue));
+
+        document.querySelector(".successBox").style.display = "block";
+
+        setTimeout(function () {
+          window.location.href = "login.html";
+        }, 1500);
+      });
+    </script>
+    <script>
+      function toggleMenu() {
+        var menu = document.getElementById("mobileMenu");
+
+        if (menu.style.display === "none" || menu.style.display === "") {
+          menu.style.display = "block";
+        } else {
+          menu.style.display = "none";
+        }
+      }
+    </script>
+  </body>
+</html>
