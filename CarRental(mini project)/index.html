@@ -1,0 +1,572 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CarRental – Self Drive Car Rentals</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+  <style>
+    :root {
+      --brand-teal: #0d9488;
+      --brand-teal-dark: #0f766e;
+      --brand-slate: #1e293b;
+      --bg-soft: #f8fafc;
+    }
+
+    body {
+      background: var(--bg-soft);
+      font-family: system-ui, -apple-system, sans-serif;
+    }
+
+    .navbar {
+      background: linear-gradient(135deg, var(--brand-slate) 0%, #334155 100%) !important;
+      box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
+      height: 64px;
+      padding-top: 0;
+      padding-bottom: 0;
+    }
+
+    .navbar-brand img {
+      max-height: 120px;
+      width: auto;
+    }
+
+
+    .navbar-brand {
+      display: flex;
+      align-items: center;
+      height: 100%;
+    }
+
+
+    .nav-link {
+      font-weight: 500;
+    }
+
+    .hero-wrap {
+      position: relative;
+      border-radius: 0 0 24px 24px;
+      overflow: hidden;
+      box-shadow: 0 8px 30px rgba(0, 0, 0, 0.12);
+    }
+
+    .hero-wrap img {
+      height: 320px;
+      object-fit: cover;
+      width: 100%;
+    }
+
+    .hero-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(180deg, rgba(15, 23, 42, 0.4) 0%, rgba(15, 23, 42, 0.7) 100%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .hero-text {
+      color: #fff;
+      text-align: center;
+      padding: 2rem;
+    }
+
+    .hero-text h1 {
+      font-weight: 700;
+      font-size: clamp(1.75rem, 4vw, 2.25rem);
+      letter-spacing: -0.5px;
+      margin-bottom: 0.5rem;
+    }
+
+    .hero-text p {
+      font-size: 1.05rem;
+      opacity: 0.95;
+      margin: 0;
+    }
+
+    .search-card {
+      border: none;
+      border-radius: 16px;
+      box-shadow: 0 10px 40px rgba(15, 23, 42, 0.1);
+      padding: 1.75rem;
+      margin-top: -2rem;
+      position: relative;
+      z-index: 2;
+      background: #fff;
+    }
+
+    .search-card h4 {
+      font-weight: 600;
+      color: var(--brand-slate);
+      margin-bottom: 1rem;
+    }
+
+    .form-select {
+      border-radius: 10px;
+      padding: 0.65rem 1rem;
+      border: 1px solid #e2e8f0;
+      font-weight: 500;
+    }
+
+    .form-select:focus {
+      border-color: var(--brand-teal);
+      box-shadow: 0 0 0 3px rgba(13, 148, 136, 0.15);
+    }
+
+    .btn-search {
+      background: linear-gradient(135deg, var(--brand-teal) 0%, var(--brand-teal-dark) 100%);
+      border: none;
+      border-radius: 10px;
+      padding: 0.75rem 1.5rem;
+      font-weight: 600;
+    }
+
+    .btn-search:hover {
+      opacity: 0.95;
+      transform: translateY(-1px);
+    }
+
+    .features {
+      margin-top: 3rem;
+    }
+
+    .feature-box {
+      text-align: center;
+      padding: 1.5rem;
+      border-radius: 12px;
+      background: #fff;
+      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.06);
+      transition: transform 0.2s;
+    }
+
+    .feature-box:hover {
+      transform: translateY(-4px);
+    }
+
+    .feature-box .icon {
+      font-size: 2rem;
+      margin-bottom: 0.5rem;
+    }
+
+    .feature-box-why h6 {
+      font-weight: 600;
+      color: var(--brand-slate);
+    }
+
+    .feature-box-why p {
+      font-size: 0.9rem;
+      color: #64748b;
+      margin: 0;
+    }
+
+    .feature-box-why {
+      text-align: center;
+      padding: 1.5rem;
+      border-radius: 12px;
+      background: #fff;
+      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.06);
+      transition: transform 0.2s;
+    }
+
+    .feature-box-why:hover {
+      transform: translateY(-4px);
+    }
+
+    .feature-box-why .icon {
+      font-size: 2rem;
+      margin-bottom: 0.5rem;
+    }
+
+    .feature-box-why h6 {
+      font-weight: 600;
+      color: var(--brand-slate);
+    }
+
+    .feature-box-why p {
+      font-size: 0.9rem;
+      color: #64748b;
+      margin: 0;
+    }
+
+    .profile-icon {
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.25);
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.1rem;
+    }
+
+    .info-card,
+    .card {
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .info-card:hover,
+    .card:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 12px 30px rgba(255, 255, 255, 0.45);
+    }
+
+    @keyframes pulseSoft {
+      0% {
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+      }
+
+      50% {
+        box-shadow: 0 6px 18px rgba(214, 193, 3, 0.825);
+      }
+
+      100% {
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+      }
+    }
+
+    .offer-animate {
+      animation: pulseSoft 1s ease-in-out infinite;
+    }
+
+    .feature-box {
+      transition: transform 0.35s ease, box-shadow 0.35s ease;
+    }
+
+    .feature-box:hover {
+      transform: translateY(-8px) scale(1.02);
+      box-shadow: 0 14px 35px rgba(236, 72, 153, 0.45);
+    }
+
+    .car-types .card {
+      transition: transform 0.35s ease, box-shadow 0.35s ease !important;
+    }
+
+    .car-types .card:hover {
+      transform: translateY(-10px) scale(1.04) !important;
+      box-shadow: 0 16px 40px rgba(236, 72, 153, 0.45) !important;
+    }
+
+    #recentHomeSection .car-card {
+  border-radius: 14px;
+}
+
+#recentHomeSection .card-img-wrap {
+  height: 200px;
+  background: #f8fafc;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+#recentHomeSection .card-img-wrap img {
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain;
+}
+
+  </style>
+  <script>
+    function goToCars() {
+      var city = document.getElementById("city").value;
+      if (city === "") {
+        alert("Please select a city");
+        return false;
+      }
+      localStorage.setItem("city", city);
+      return true;
+    }
+  </script>
+</head>
+
+<body>
+
+  <nav class="navbar navbar-expand-lg navbar-dark">
+    <div class="container-fluid">
+      <a class="navbar-brand" href="index.html"><img src="images/Logo.png" alt="CarRental Logo"></a>
+      <button class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#nav">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse justify-content-end" id="nav">
+        <ul class="navbar-nav align-items-center">
+          <li class="nav-item"><a class="nav-link active" href="index.html">Home</a></li>
+          <li class="nav-item" id="navHistoryWrap" style="display:none;"><a class="nav-link" href="history.html">Booking
+              History</a></li>
+          <li class="nav-item"><a class="nav-link" href="support.html">Support</a></li>
+          <li class="nav-item" id="navLoginWrap"><a class="nav-link" href="login.html">Login</a></li>
+          <li class="nav-item dropdown" id="navProfileWrap" style="display:none;">
+            <a class="nav-link dropdown-toggle d-flex align-items-center" href="#" data-bs-toggle="dropdown">
+              <span class="profile-icon">👤</span>
+            </a>
+            <ul class="dropdown-menu dropdown-menu-end">
+              <li><span class="dropdown-header fw-bold" id="profileName">–</span></li>
+              <li><span class="dropdown-item-text small" id="profileEmail">–</span></li>
+              <li><span class="dropdown-item-text small" id="profilePhone">–</span></li>
+              <li>
+                <hr class="dropdown-divider">
+              </li>
+              <li>
+  <a class="dropdown-item" href="profile.html">Edit Profile</a>
+</li>
+
+              <li><a class="dropdown-item" href="#" onclick="logout(); return false;">Logout</a></li>
+            </ul>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <div class="container-fluid p-0">
+    <div class="hero-wrap">
+      <img src="images/hero.jpg" alt="Car Rental">
+      <div class="hero-overlay">
+        <div class="hero-text">
+          <h1>Drive anywhere, anytime</h1>
+          <p>Affordable self-drive cars at your fingertips</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="container">
+      <div class="search-card card">
+        <h4>Where do you want to go?</h4>
+        <div class="row g-3 align-items-end">
+          <div class="col-md-8">
+            <label class="form-label small text-muted mb-1">Location</label>
+            <select id="city" class="form-select form-select-lg">
+              <option value="">-- Choose City --</option>
+              <option>Mumbai</option>
+              <option>Delhi</option>
+              <option>Bangalore</option>
+              <option>Hyderabad</option>
+              <option>Pune</option>
+              <option>Kolkata</option>
+              <option>Ahmedabad</option>
+              <option>Jaipur</option>
+              <option>Chandigarh</option>
+              <option>Faridabad</option>
+              <option>Gurgaon</option>
+              <option>Silliguri</option>
+              <option>Bhopal</option>
+              <option>Srinagar</option>
+              <option>Udaipur</option>
+              <option>Ajmer</option>
+            </select>
+          </div>
+          <div class="col-md-4">
+            <a href="cars.html" class="btn btn-primary btn-search w-100 btn-lg" onclick="return goToCars()">Search
+              Cars</a>
+          </div>
+        </div>
+      </div>
+
+      <section class="container my-5 d-none" id="recentHomeSection">
+        <div class="d-flex justify-content-between align-items-center mb-3">
+          <h4 class="fw-semibold text-muted">Recently Viewed</h4>
+        </div>
+
+        <div class="row g-4" id="recentHomeContainer"></div>
+      </section>
+      
+      <div class="features row g-3">
+        <h4 class="fw-semibold mb-3">CarRental Assures </h4>
+        <div class="col-md-4">
+          <div class="feature-box">
+            <div class="icon">🛡️</div>
+            <h6>Secured trips</h6>
+            <p>Verified cars & transparent pricing</p>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="feature-box">
+            <div class="icon">🚗</div>
+            <h6>Wide selection</h6>
+            <p>Hatchbacks, sedans & SUVs</p>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="feature-box">
+            <div class="icon">⏱️</div>
+            <h6>Flexible booking</h6>
+            <p>Hourly, daily or longer</p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="container mt-5 mb-5">
+
+      <section class="car-types py-4">
+        <div class="container">
+          <h4 class="fw-semibold mb-3">Car Categories</h4>
+          <div class="row g-3">
+            <div class="col-md-3">
+              <div class="card p-3 text-center border-0 shadow-sm">
+                🚘
+                <h6>Sedan</h6>
+                <p class="text-secondary small">Comfortable for families</p>
+              </div>
+            </div>
+            <div class="col-md-3">
+              <div class="card p-3 text-center border-0 shadow-sm">
+                🚗
+                <h6>Hatchback</h6>
+                <p class="text-secondary small">Best for city rides</p>
+              </div>
+            </div>
+            <div class="col-md-3">
+              <div class="card p-3 text-center border-0 shadow-sm">
+                🚙
+                <h6>SUV</h6>
+                <p class="text-secondary small">Perfect for road trips</p>
+              </div>
+            </div>
+            <div class="col-md-3">
+              <div class="card p-3 text-center border-0 shadow-sm">
+                🚐
+                <h6>Coupe</h6>
+                <p class="text-secondary small">Sporty style</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <h5 class="fw-semibold mb-3" style="color:#1e293b;">Trending offers</h5>
+      <div class="mb-4">
+        <div class="p-3 rounded mb-2 offer-animate" style="background:#f0fdfa;border:1px solid #ccfbf1;">
+          <strong>TRIP10</strong> – Flat 10% off on your first booking
+        </div>
+        <div class="p-3 rounded mb-2 offer-animate" style="background:#f0fdfa;border:1px solid #ccfbf1;">
+          <strong>WEEKEND</strong> – 5% off on 2+ day weekend rentals
+        </div>
+        <div class="p-3 rounded mb-2 offer-animate" style="background:#f0fdfa;border:1px solid #ccfbf1;">
+          <strong>ICICI Credit Card (ICICI15)</strong> – ICICI cardholders get 15% off
+        </div>
+      </div>
+
+      <h5 class="fw-semibold mb-3" style="color:#1e293b;">Why choose us</h5>
+      <div class="feature-box-why text-start">
+        <p>✓ Flexible self-drive rentals</p>
+        <p>✓ Transparent pricing</p>
+        <p>✓ Wide range of cars</p>
+        <p>✓ Secure & verified bookings</p>
+      </div>
+
+      <section class="container my-5 fade-in">
+        <div class="d-flex justify-content-between align-items-center mb-3">
+          <h4 class="fw-semibold text-muted">FAQs</h4>
+          <a href="faq.html" class="text-decoration-none fw-semibold" style="color:#0d9488">
+            View all
+          </a>
+        </div>
+
+        <div class="card border-0 shadow-sm p-4">
+          <div class="mb-4">
+            <h6 class="fw-semibold">What is the minimum age required to rent a car?</h6>
+            <p class="mb-0 text-secondary">
+              <strong>Minimum age:</strong> 21 years<br>
+              <strong>Driving license:</strong> Must be at least 1 year old.
+            </p>
+          </div>
+
+          <hr>
+
+          <div class="mb-4">
+            <h6 class="fw-semibold">What documents are required to rent a car?</h6>
+            <p class="mb-2 text-secondary">You need to provide:</p>
+            <ul class="text-secondary">
+              <li><strong>Valid Driving License</strong></li>
+              <li><strong>Government ID</strong> (Aadhaar, Passport, PAN)</li>
+              <li>Selfie verification during booking</li>
+            </ul>
+          </div>
+
+          <hr>
+
+          <div class="mb-4">
+            <h6 class="fw-semibold">Is a security deposit required?</h6>
+            <p class="mb-0 text-secondary">
+              Yes. A <strong>refundable security deposit</strong> is required. The amount varies by car model and rental
+              type.
+            </p>
+          </div>
+
+          <hr>
+
+          <div>
+            <h6 class="fw-semibold">Are there any speed limits for rental cars?</h6>
+            <p class="mb-0 text-secondary">
+              Yes. Follow all local traffic laws and posted speed limits. Overspeeding may incur penalties or void
+              insurance coverage.
+            </p>
+          </div>
+        </div>
+      </section>
+
+
+      <footer class="text-center py-3 text-secondary small">
+        © 2026 CarRental · Self Drive Car Booking
+      </footer>
+
+
+    </div>
+
+  </div>
+
+  <script>
+
+    (function loadRecentOnHome() {
+      const email = localStorage.getItem("userEmail") || "guest";
+const recent = JSON.parse(localStorage.getItem("recentCars_" + email)) || [];
+
+      if (recent.length === 0) return
+
+      document.getElementById('recentHomeSection').classList.remove('d-none')
+
+      document.getElementById('recentHomeContainer').innerHTML =
+recent.slice(0, 3).map(car => `
+  <div class="col-md-4 d-flex">
+    <div class="car-card w-100">
+      <div class="card-img-wrap">
+        <img src="${car.img}" alt="${car.name}">
+      </div>
+      <div class="card-body text-center">
+        <h6 class="fw-semibold">${car.name}</h6>
+        <p class="price">₹${car.price} / day</p>
+        <a href="cars.html" class="btn btn-sm btn-outline-primary w-100">
+          View Car
+        </a>
+      </div>
+    </div>
+  </div>
+`).join('')
+
+    })()
+    function logout() {
+      localStorage.removeItem('loggedIn');
+      localStorage.removeItem('userEmail');
+      localStorage.removeItem('userName');
+      localStorage.removeItem('userPhone');
+      window.location.href = 'index.html';
+    }
+    (function initNav() {
+      if (localStorage.getItem('loggedIn') === 'true') {
+        document.getElementById('navLoginWrap').style.display = 'none';
+        document.getElementById('navProfileWrap').style.display = 'block';
+        document.getElementById('navHistoryWrap').style.display = 'block';
+        document.getElementById('profileName').textContent = localStorage.getItem('userName') || 'User';
+        document.getElementById('profileEmail').textContent = localStorage.getItem('userEmail') || '';
+        document.getElementById('profilePhone').textContent = localStorage.getItem('userPhone') || 'Not set';
+      } else {
+        document.getElementById('navHistoryWrap').style.display = 'none';
+        document.getElementById('navProfileWrap').style.display = 'none';
+      }
+    })();
+  </script>
+
+</body>
+
+</html>

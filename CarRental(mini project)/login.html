@@ -1,0 +1,470 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Login | CarRental</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+  <style>
+    :root {
+      --brand-teal: #0d9488;
+      --brand-teal-dark: #0f766e;
+      --brand-slate: #1e293b;
+      --bg-soft: #f8fafc;
+    }
+
+    body {
+      background: var(--bg-soft);
+      min-height: 100vh;
+      font-family: system-ui, -apple-system, sans-serif;
+    }
+
+    .navbar {
+      background: linear-gradient(135deg, var(--brand-slate) 0%, #334155 100%) !important;
+      box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
+      height: 64px;
+      padding-top: 0;
+      padding-bottom: 0;
+    }
+
+    .navbar-brand img {
+      max-height: 120px;
+      width: auto;
+    }
+
+
+    .navbar-brand {
+      display: flex;
+      align-items: center;
+      height: 100%;
+    }
+
+    .nav-link {
+      font-weight: 500;
+    }
+
+    .login-section {
+      padding: 2rem 0 3rem;
+    }
+
+    .login-card {
+      border: none;
+      border-radius: 16px;
+      box-shadow: 0 10px 40px rgba(15, 23, 42, 0.12);
+      overflow: hidden;
+      max-width: 420px;
+    }
+
+    .login-card .card-header {
+      background: linear-gradient(135deg, var(--brand-teal) 0%, var(--brand-teal-dark) 100%);
+      color: #fff;
+      font-weight: 600;
+      padding: 1.25rem 1.5rem;
+      font-size: 1.25rem;
+      border: none;
+    }
+
+    .login-card .card-body {
+      padding: 2rem 1.5rem;
+    }
+
+    .form-control {
+      border-radius: 10px;
+      padding: 0.65rem 1rem;
+      border: 1px solid #e2e8f0;
+    }
+
+    .form-control:focus {
+      border-color: var(--brand-teal);
+      box-shadow: 0 0 0 3px rgba(13, 148, 136, 0.15);
+    }
+
+    .btn {
+      background: linear-gradient(135deg, var(--brand-teal) 0%, var(--brand-teal-dark) 100%);
+      border: none;
+      border-radius: 10px;
+      padding: 0.75rem;
+      font-weight: 600;
+    }
+
+    .btn:hover {
+      opacity: 0.95;
+      transform: translateY(-1px);
+    }
+
+    .form-label {
+      font-weight: 500;
+      color: var(--brand-slate);
+    }
+
+    .login-footer {
+      text-align: center;
+      margin-top: 1rem;
+      font-size: 0.9rem;
+      color: #64748b;
+    }
+
+    .login-footer a {
+      color: var(--brand-teal);
+      text-decoration: none;
+      font-weight: 500;
+    }
+
+    .profile-icon {
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.25);
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.1rem;
+    }
+
+    .section-title {
+      font-weight: 600;
+      color: var(--brand-slate);
+      margin-bottom: 1.25rem;
+      font-size: 1.25rem;
+    }
+
+    .info-card {
+      border: none;
+      border-radius: 12px;
+      box-shadow: 0 4px 16px rgba(15, 23, 42, 0.08);
+      padding: 1.25rem;
+      background: #fff;
+      height: 100%;
+      transition: transform 0.2s;
+    }
+
+    .info-card:hover {
+      transform: translateY(-2px);
+    }
+
+    .info-card h6 {
+      font-weight: 600;
+      color: var(--brand-slate);
+      margin-bottom: 0.5rem;
+    }
+
+    .info-card p {
+      font-size: 0.9rem;
+      color: #64748b;
+      margin: 0;
+    }
+
+    .offer-card {
+      border: 2px solid #e0f2f1;
+      border-radius: 12px;
+      padding: 1rem 1.25rem;
+      background: linear-gradient(135deg, #f0fdfa 0%, #fff 100%);
+      margin-bottom: 0.75rem;
+    }
+
+    .offer-card strong {
+      color: var(--brand-teal-dark);
+    }
+
+    .benefit-item {
+      padding: 0.5rem 0;
+      border-bottom: 1px solid #f1f5f9;
+      display: flex;
+      align-items: flex-start;
+      gap: 0.5rem;
+    }
+
+    .benefit-item:last-child {
+      border-bottom: none;
+    }
+
+    .benefit-item span {
+      font-size: 1.25rem;
+    }
+
+    .benefit-item div {
+      font-size: 0.95rem;
+      color: #475569;
+    }
+  </style>
+</head>
+
+<body>
+
+  <nav class="navbar navbar-expand-lg navbar-dark">
+    <div class="container-fluid">
+      <a class="navbar-brand" href="index.html"><img src="images/Logo.png" alt="CarRental Logo"></a>
+      <button class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#nav">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse justify-content-end" id="nav">
+        <ul class="navbar-nav align-items-center">
+          <li class="nav-item"><a class="nav-link active" href="index.html">Home</a></li>
+          <li class="nav-item" id="navHistoryWrap" style="display:none;"><a class="nav-link" href="history.html">Booking
+              History</a></li>
+          <li class="nav-item"><a class="nav-link" href="support.html">Support</a></li>
+          <li class="nav-item" id="navLoginWrap"><a class="nav-link" href="login.html">Login</a></li>
+          <li class="nav-item dropdown" id="navProfileWrap" style="display:none;">
+            <a class="nav-link dropdown-toggle d-flex align-items-center" href="#" data-bs-toggle="dropdown">
+              <span class="profile-icon">👤</span>
+            </a>
+            <ul class="dropdown-menu dropdown-menu-end">
+              <li><span class="dropdown-header fw-bold" id="profileName">–</span></li>
+              <li><span class="dropdown-item-text small" id="profileEmail">–</span></li>
+              <li><span class="dropdown-item-text small" id="profilePhone">–</span></li>
+              <li>
+                <hr class="dropdown-divider">
+              </li>
+              <li>
+                <a class="dropdown-item" href="profile.html">Edit Profile</a>
+              </li>
+
+              <li><a class="dropdown-item" href="#" onclick="logout(); return false;">Logout</a></li>
+            </ul>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <div class="container">
+    <div class="row justify-content-center">
+      <div class="col-lg-5 col-md-7 col-sm-10">
+        <div class="login-section">
+          <div class="login-card card mx-auto" id="loginCard">
+            <div class="card-header">Sign In</div>
+            <div class="card-body">
+              <form id="loginForm" onsubmit="return handleLogin(event)" action="#" method="post">
+                <div class="mb-3">
+                  <label class="form-label" for="email">Email <span class="text-danger">*</span></label>
+                  <input type="email" id="email" class="form-control" placeholder="you@example.com" required>
+                </div>
+                <div class="mb-3">
+                  <label class="form-label" for="password">
+                    Password <span class="text-danger">*</span>
+                  </label>
+                  <input type="password" id="password" class="form-control" placeholder="••••••••" required
+                    minlength="8" pattern="(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}"
+                    title="Password must be at least 8 characters and include uppercase, lowercase, number, and special character">
+                </div>
+
+                <div id="signupFields" class="d-none">
+                  <div class="mb-3">
+                    <label class="form-label" for="userName">Name</label>
+                    <input type="text" id="userName" class="form-control" placeholder="Your name">
+                  </div>
+
+                  <div class="mb-3">
+                    <label class="form-label" for="userPhone">Phone</label>
+                    <input type="tel" id="userPhone" class="form-control" placeholder="10-digit mobile" maxlength="10"
+                      pattern="[0-9]{10}" inputmode="numeric"
+                      oninput="this.value=this.value.replace(/[^0-9]/g,'').slice(0,10);">
+                  </div>
+                </div>
+
+                <button type="submit" class="btn btn-primary btn-login w-100" id="loginBtn">
+                  Login
+                </button>
+                <div class="text-end mb-3" id="forgotWrap">
+                  <a href="#" data-bs-toggle="modal" data-bs-target="#forgotModal" class="text-decoration-none"
+                    style="font-size:0.9rem;">
+                    Forgot password?
+                  </a>
+                </div>
+
+                <button type="button" class="btn btn-primary w-100" id="toggleBtn" onclick="toggleMode()">
+                  Sign Up
+                </button>
+              </form>
+              <p class="login-footer mt-3 mb-0">
+                Sign in to book cars and view your booking history.
+              </p>
+            </div>
+          </div>
+          <div class="card mx-auto mt-3 border-0 shadow-none d-none" id="alreadyLoggedCard" style="max-width:420px;">
+            <div class="card-body text-center py-4">
+              <p class="text-muted mb-2">You are logged in as <strong id="loggedEmail"></strong></p>
+              <a href="index.html" class="btn btn-outline-primary me-2">Home</a>
+              <button type="button" class="btn btn-outline-secondary" onclick="logout()">Logout</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <script>
+        function getRedirect() {
+          var m = /redirect=([^&]+)/.exec(window.location.search || '');
+          return m ? decodeURIComponent(m[1]) : 'index.html';
+        }
+
+        function handleLogin(e) {
+          e.preventDefault()
+
+          const email = document.getElementById("email").value.trim()
+          const password = document.getElementById("password").value
+
+          let users = JSON.parse(localStorage.getItem("users")) || {}
+
+          if (isSignup) {
+            if (users[email]) {
+              alert("User already exists. Please login.")
+              return false
+            }
+
+            const name = document.getElementById("userName").value.trim()
+            const phone = document.getElementById("userPhone").value.trim()
+
+            if (!name || !phone) {
+              alert("Please enter name and phone number")
+              return false
+            }
+
+            users[email] = {
+              password,
+              name,
+              phone
+            }
+
+            localStorage.setItem("users", JSON.stringify(users))
+            alert("Account created. Please login.")
+            toggleMode()
+            return false
+          }
+
+
+          if (!users[email]) {
+            alert("User not found. Please sign up first.")
+            return false
+          }
+
+          if (users[email].password !== password) {
+            alert("Incorrect password")
+            return false
+          }
+
+          localStorage.setItem("loggedIn", "true")
+          localStorage.setItem("userEmail", email)
+          localStorage.setItem("userName", users[email].name || "")
+          localStorage.setItem("userPhone", users[email].phone || "")
+
+          alert("Login successful")
+          window.location.href = getRedirect()
+          return false
+        }
+        let isSignup = false
+
+        function toggleMode() {
+          isSignup = !isSignup
+
+          const loginBtn = document.getElementById("loginBtn")
+          const toggleBtn = document.getElementById("toggleBtn")
+          const passwordLabel = document.querySelector('label[for="password"]')
+          const signupFields = document.getElementById("signupFields")
+          const forgotWrap = document.getElementById("forgotWrap")
+          if (isSignup) {
+            forgotWrap.style.display = "none"
+          } else {
+            forgotWrap.style.display = "block"
+          }
+
+
+          if (isSignup) {
+            signupFields.classList.remove("d-none")
+            loginBtn.innerText = "Create Account"
+            toggleBtn.innerText = "Back to Login"
+            toggleBtn.classList.add("mt-2")
+            passwordLabel.innerHTML = 'Create Password <span class="text-danger">*</span>'
+          } else {
+            signupFields.classList.add("d-none")
+            loginBtn.innerText = "Login"
+            toggleBtn.innerText = "Sign Up"
+            passwordLabel.innerHTML = 'Password <span class="text-danger">*</span>'
+          }
+        }
+
+
+        function logout() {
+          localStorage.removeItem('loggedIn');
+          localStorage.removeItem('userEmail');
+          localStorage.removeItem('userName');
+          localStorage.removeItem('userPhone');
+          location.reload();
+        }
+
+        (function init() {
+          if (localStorage.getItem('loggedIn') === 'true') {
+            document.getElementById('loginCard').classList.add('d-none');
+            document.getElementById('alreadyLoggedCard').classList.remove('d-none');
+            document.getElementById('loggedEmail').textContent = localStorage.getItem('userEmail') || '';
+            document.getElementById('navLoginWrap').style.display = 'none';
+            document.getElementById('navProfileWrap').style.display = 'block';
+            document.getElementById('navHistoryWrap').style.display = 'block';
+            document.getElementById('profileName').textContent = localStorage.getItem('userName') || 'User';
+            document.getElementById('profileEmail').textContent = localStorage.getItem('userEmail') || '';
+            document.getElementById('profilePhone').textContent = localStorage.getItem('userPhone') || 'Not set';
+          } else {
+            document.getElementById('navHistoryWrap').style.display = 'none';
+            document.getElementById('navProfileWrap').style.display = 'none';
+          }
+        })();
+
+        function resetPassword() {
+          const email = document.getElementById("fpEmail").value.trim()
+          const newPass = document.getElementById("fpPassword").value.trim()
+
+          if (!email || !newPass) {
+            alert("Please fill all fields")
+            return
+          }
+
+          let users = JSON.parse(localStorage.getItem("users")) || {}
+
+          if (!users[email]) {
+            alert("Email not found. Please sign up first.")
+            return
+          }
+
+          users[email].password = newPass
+          localStorage.setItem("users", JSON.stringify(users))
+
+          alert("Password updated successfully")
+
+          document.getElementById("fpEmail").value = ""
+          document.getElementById("fpPassword").value = ""
+
+          const modal = bootstrap.Modal.getInstance(
+            document.getElementById("forgotModal")
+          )
+          modal.hide()
+        }
+
+      </script>
+      <div class="modal fade" id="forgotModal" tabindex="-1">
+        <div class="modal-dialog modal-dialog-centered">
+          <div class="modal-content p-4 rounded-4">
+
+            <h5 class="fw-semibold mb-3">Reset Password</h5>
+
+            <div class="mb-3">
+              <label class="form-label">Registered Email</label>
+              <input type="email" id="fpEmail" class="form-control" placeholder="you@example.com">
+            </div>
+
+            <div class="mb-3">
+              <label class="form-label">New Password</label>
+              <input type="password" id="fpPassword" class="form-control" placeholder="New strong password">
+            </div>
+
+            <button class="btn btn-primary w-100" onclick="resetPassword()">
+              Update Password
+            </button>
+
+          </div>
+        </div>
+      </div>
+
+</body>
+
+</html>
