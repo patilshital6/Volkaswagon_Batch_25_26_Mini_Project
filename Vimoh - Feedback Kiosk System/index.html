@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Mini Project</title>
+
+  <!-- Google Font -->
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap"
+    rel="stylesheet"
+  />
+
+  <!-- Bootstrap CSS -->
+  <link
+    href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
+    rel="stylesheet"
+  />
+
+  <!-- Custom CSS -->
+  <link rel="stylesheet" href="styles.css" />
+</head>
+
+<body>
+
+<!-- ================= LOGIN / REGISTER ================= -->
+<div id="loginContainer" class="login-wrapper">
+  <div class="login-card">
+    <h3 id="authTitle">Welcome Back</h3>
+    <p class="text-muted" id="authSubtitle">Login to continue</p>
+
+    <input id="loginUsername" class="form-control mb-2" placeholder="Username" />
+
+    <input
+      id="loginEmail"
+      class="form-control mb-2"
+      placeholder="Email"
+      style="display:none"
+    />
+
+    <input
+      id="loginPassword"
+      type="password"
+      class="form-control mb-3"
+      placeholder="Password"
+    />
+
+    <button id="loginBtn" class="btn btn-primary w-100">
+      Login
+    </button>
+
+    <button
+      id="registerBtn"
+      class="btn btn-secondary w-100 mt-2"
+      style="display:none"
+    >
+      Register
+    </button>
+
+    <small
+      id="toggleAuth"
+      class="text-muted d-block mt-3"
+      style="cursor:pointer"
+    >
+      Don’t have an account? <b>Register</b>
+    </small>
+
+    <small class="text-muted d-block mt-2">
+      Login as <b>admin / admin123</b> for admin access
+    </small>
+
+    <div id="loginError" class="small mt-2 text-danger" style="display:none"></div>
+  </div>
+</div>
+
+<!-- ================= APP ================= -->
+<div class="container mt-4" id="appContainer" style="display:none">
+  <button id="logoutBtn" class="btn btn-outline-danger btn-sm mb-3">
+    Logout
+  </button>
+
+  <h2 class="mb-4">Feedback Kiosk System</h2>
+
+  <!-- Add User Form -->
+  <div class="card mb-4" id="userForm">
+    <div class="card-body">
+      <h5>Add User</h5>
+
+      <div class="row g-2">
+        <div class="col-md-3">
+          <input id="nameInput" class="form-control" placeholder="Name" />
+        </div>
+        <div class="col-md-3">
+          <input id="emailInput" class="form-control" placeholder="Email" />
+        </div>
+        <div class="col-md-2">
+          <select id="roleSelect" class="form-select">
+            <option value="ADMIN">ADMIN</option>
+            <option value="USER">USER</option>
+          </select>
+        </div>
+        <div class="col-md-2">
+          <select id="statusSelect" class="form-select">
+            <option value="PENDING">PENDING</option>
+            <option value="APPROVED">APPROVED</option>
+            <option value="REJECTED">REJECTED</option>
+          </select>
+        </div>
+        <div class="col-md-2">
+          <button id="addUserBtn" class="btn btn-primary w-100">
+            Add User
+          </button>
+        </div>
+      </div>
+
+      <div id="userFormMsg" class="small mt-2" style="display:none"></div>
+    </div>
+  </div>
+
+  <!-- User List -->
+  <div id="userList" class="row g-3"></div>
+</div>
+
+<script type="module" src="dist/app.js"></script>
+</body>
+</html>
