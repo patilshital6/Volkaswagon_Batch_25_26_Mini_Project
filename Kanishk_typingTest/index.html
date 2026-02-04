@@ -1,0 +1,77 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Typing Test</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <div class="app">
+    <header class="top">
+      <h1>Typing Test</h1>
+      <div class="controls">
+        <label class="vis">Mode</label>
+        <select id="mode" aria-label="Time mode">
+          <option value="30">30s</option>
+          <option value="60" selected>60s</option>
+        </select>
+        <button id="start" class="btn primary">Start</button>
+        <button id="restart" class="btn">Restart</button>
+      </div>
+    </header>
+
+    <main class="main">
+      <section class="left" id="playArea">
+        <div id="text" class="text" aria-live="polite"></div>
+        <textarea id="input" placeholder="Start typing..." spellcheck="false" autocomplete="off" autocorrect="off" autocapitalize="off"></textarea>
+      </section>
+
+      <aside class="right">
+        <div class="card">
+          <div class="row"><small>Time left</small><strong id="time">60</strong><small>s</small></div>
+          <div class="row"><small>WPM</small><strong id="wpm">0</strong></div>
+          <div class="row"><small>Accuracy</small><strong id="acc">100%</strong></div>
+          <div class="row"><small>All-time best (net)</small><strong id="best">0</strong></div>
+        </div>
+
+        <div class="card tips">
+          <small>Tips</small>
+          <ul>
+            <li>Accuracy first — speed follows.</li>
+            <li>Use the Start button; or simply type to begin.</li>
+          </ul>
+        </div>
+      </aside>
+    </main>
+
+    <footer id="status" class="status">Idle — choose a mode and press Start</footer>
+  </div>
+
+  <div class="resultPanel" id="result" aria-hidden="true">
+    <div class="resultCard">
+      <h2>Session results</h2>
+      <div class="resultGrid">
+        <div><small>Raw WPM</small><strong id="resRaw">0</strong></div>
+        <div><small>Net WPM</small><strong id="resNet">0</strong></div>
+        <div><small>Accuracy</small><strong id="resAcc">100%</strong></div>
+        <div><small>Chars (correct / wrong)</small><strong id="resChars">0 / 0</strong></div>
+        <div><small>CPS (chars/sec)</small><strong id="resCps">0</strong></div>
+        <div><small>Best (net WPM)</small><strong id="resBest">0</strong></div>
+      </div>
+
+      <div class="chartWrap">
+        <small>WPM over time</small>
+        <canvas id="resultChart" width="600" height="200"></canvas>
+      </div>
+
+      <div class="resultActions">
+        <button id="tryAgain" class="btn primary">Try Again</button>
+        <button id="newTest" class="btn">New Test</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
