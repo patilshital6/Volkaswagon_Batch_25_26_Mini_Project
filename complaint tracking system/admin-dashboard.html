@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Admin Dashboard | IT HelpDesk</title>
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Font Awesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<script>
+    if (localStorage.getItem("adminLoggedIn") !== "true") {
+    alert("Please login as admin first");
+    window.location.href = "admin-login.html";
+}
+
+</script>
+<body>
+
+<!-- Navbar -->
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark shadow">
+    <div class="container">
+        <a class="navbar-brand" href="#">
+            <i class="fa-solid fa-user-shield"></i> Admin Dashboard
+        </a>
+        <div class="ms-auto">
+            <button class="btn btn-outline-light btn-sm" onclick="adminLogout()">
+    <i class="fa-solid fa-right-from-bracket"></i> Logout
+</button>
+
+        </div>
+    </div>
+</nav>
+
+<!-- Dashboard Stats -->
+<div class="container mt-4">
+    <div class="row g-4">
+
+        <div class="col-md-4">
+            <div class="card text-white bg-primary shadow-sm">
+                <div class="card-body">
+                    <h5 class="card-title"><i class="fa-solid fa-list"></i> Total Complaints</h5>
+                    <h2 id="totalCount">0</h2>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-4">
+            <div class="card text-white bg-warning shadow-sm">
+                <div class="card-body">
+                    <h5 class="card-title"><i class="fa-solid fa-hourglass-half"></i> Pending</h5>
+                    <h2 id="pendingCount">0</h2>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-4">
+            <div class="card text-white bg-success shadow-sm">
+                <div class="card-body">
+                    <h5 class="card-title"><i class="fa-solid fa-check"></i> Resolved</h5>
+                    <h2 id="resolvedCount">0</h2>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<!-- Complaints Table -->
+<div class="container mt-4">
+    <div class="card shadow-sm p-3">
+        <h4 class="mb-3"><i class="fa-solid fa-list-check"></i> All Complaints</h4>
+        <div class="table-responsive">
+            <table class="table table-striped table-bordered align-middle">
+                <thead class="table-dark">
+                    <tr>
+                        <th>Issue</th>
+                        <th>Priority</th>
+                        <th>Status</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody id="adminComplaintTable"></tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+<!-- JS Scripts -->
+<script src="js/script.js"></script>
+</body>
+</html>
