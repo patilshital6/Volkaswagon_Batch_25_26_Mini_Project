@@ -1,0 +1,136 @@
+<!doctype html>
+<html>
+  <head>
+    <title>City Hospital | Doctors</title>
+
+    <!-- CSS -->
+    <link
+      rel="stylesheet"
+      href="assets/plugins/bootstrap/css/bootstrap.min.css"
+    />
+    <link rel="stylesheet" href="assets/css/style.css" />
+    <link rel="stylesheet" href="assets/css/header.css" />
+    <link rel="stylesheet" href="assets/css/footer.css" />
+    <link rel="stylesheet" href="assets/plugins/line-icons-pro/styles.css" />
+    <link rel="stylesheet" href="assets/plugins/line-icons/line-icons.css" />
+    <link
+      rel="stylesheet"
+      href="assets/plugins/font-awesome/css/font-awesome.min.css"
+    />
+    <link rel="stylesheet" href="assets/css/custom.css" />
+  </head>
+
+  <body>
+    <!-- Header Load -->
+    <div id="header"></div>
+
+    <div class="wrapper">
+      <!-- Page Title -->
+      <div style="text-align: center; margin-top: 50px">
+        <h2>DOCTORS</h2>
+      </div>
+
+      <!-- Doctors Section -->
+      <div class="container content-md team-v1">
+        <ul class="list-unstyled row">
+          <li class="col-sm-3 col-xs-6">
+            <div class="team-img">
+              <img class="img-responsive" src="assets/img/team/1.jpg" />
+            </div>
+            <h3>Dr. Harshil Patel</h3>
+            <h4>/ Consultant</h4>
+            <p>Child care</p>
+          </li>
+
+          <li class="col-sm-3 col-xs-6">
+            <div class="team-img">
+              <img class="img-responsive" src="assets/img/team/2.jpg" />
+            </div>
+            <h3>Dr. Sahil Achhava</h3>
+            <h4>/ MBBS</h4>
+            <p>Neurology</p>
+          </li>
+
+          <li class="col-sm-3 col-xs-6">
+            <div class="team-img">
+              <img class="img-responsive" src="assets/img/team/3.jpg" />
+            </div>
+            <h3>Dr. Dhruv Shah</h3>
+            <h4>/ MBBS, MS, DNB</h4>
+            <p>General Surgery</p>
+          </li>
+
+          <li class="col-sm-3 col-xs-6">
+            <div class="team-img">
+              <img class="img-responsive" src="assets/img/team/4.jpg" />
+            </div>
+            <h3>Dr. Vijeta Kumari</h3>
+            <h4>/ MBBS</h4>
+            <p>Health Checkup</p>
+          </li>
+
+          <li class="col-sm-3 col-xs-6">
+            <div class="team-img">
+              <img class="img-responsive" src="assets/img/team/5.jpg" />
+            </div>
+            <h3>Dr. Yagnesh Patel</h3>
+            <h4>/ MD</h4>
+            <p>Dermatology</p>
+          </li>
+
+          <li class="col-sm-3 col-xs-6">
+            <div class="team-img">
+              <img class="img-responsive" src="assets/img/team/6.jpg" />
+            </div>
+            <h3>Dr. Namita Bhoj</h3>
+            <h4>/ MBBS, MS, MD</h4>
+            <p>Eye Specialist</p>
+          </li>
+
+          <li class="col-sm-3 col-xs-6">
+            <div class="team-img">
+              <img class="img-responsive" src="assets/img/team/7.jpg" />
+            </div>
+            <h3>Dr. Jeel Patel</h3>
+            <h4>/ MBBS</h4>
+            <p>CCU & ICU</p>
+          </li>
+
+          <li class="col-sm-3 col-xs-6">
+            <div class="team-img">
+              <img class="img-responsive" src="assets/img/team/8.jpg" />
+            </div>
+            <h3>Dr. Harman</h3>
+            <h4>/ MBBS</h4>
+            <p>Health Checkup</p>
+          </li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- Footer Load -->
+    <div id="footer"></div>
+
+    <!-- Fetch Header & Footer -->
+    <script>
+      fetch("header.html")
+        .then((res) => res.text())
+        .then((data) => (document.getElementById("header").innerHTML = data));
+
+      fetch("footer.html")
+        .then((res) => res.text())
+        .then((data) => (document.getElementById("footer").innerHTML = data));
+    </script>
+    <script>
+      function toggleMenu() {
+        var menu = document.getElementById("mobileMenu");
+
+        if (menu.style.display === "none" || menu.style.display === "") {
+          menu.style.display = "block";
+        } else {
+          menu.style.display = "none";
+        }
+      }
+    </script>
+  </body>
+</html>

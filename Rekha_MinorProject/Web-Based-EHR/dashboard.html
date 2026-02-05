@@ -1,0 +1,102 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>City Hospital | Dashboard</title>
+
+    <!-- CSS -->
+    <link
+      rel="stylesheet"
+      href="assets/plugins/bootstrap/css/bootstrap.min.css"
+    />
+    <link rel="stylesheet" href="assets/css/style.css" />
+    <link rel="stylesheet" href="assets/css/header.css" />
+    <link rel="stylesheet" href="assets/css/footer.css" />
+    <link rel="stylesheet" href="assets/plugins/line-icons-pro/styles.css" />
+    <link rel="stylesheet" href="assets/plugins/line-icons/line-icons.css" />
+    <link
+      rel="stylesheet"
+      href="assets/plugins/font-awesome/css/font-awesome.min.css"
+    />
+    <link rel="stylesheet" href="assets/css/custom.css" />
+    <link rel="stylesheet" href="assets/css/dasboard.css" />
+  </head>
+
+  <body>
+    <!-- Header Load -->
+    <div id="header"></div>
+
+    <div class="wrapper">
+      <!-- Dashboard Section -->
+      <div class="dashboard-start">
+        <div class="dashboard-logo">
+          <img src="assets/img/logo/sex.png" />
+        </div>
+        <h1><b>User Details</b></h1>
+      </div>
+
+      <div class="detail">
+        <h4>
+          First Name:
+          <script>
+            document.write(
+              JSON.parse(localStorage.getItem("regToken")).firstName,
+            );
+          </script>
+        </h4>
+      </div>
+
+      <div class="detail">
+        <h4>
+          Last Name:
+          <script>
+            document.write(
+              JSON.parse(localStorage.getItem("regToken")).lastName,
+            );
+          </script>
+        </h4>
+      </div>
+
+      <div class="detail">
+        <h4>
+          Email:
+          <script>
+            document.write(JSON.parse(localStorage.getItem("regToken")).email);
+          </script>
+        </h4>
+      </div>
+
+      <div class="detail">
+        <a href="appointment.html">
+          <h4>BOOK APPOINTMENT</h4>
+        </a>
+      </div>
+    </div>
+
+    <!-- Footer Load -->
+    <div id="footer"></div>
+
+    <!-- Header & Footer Fetch -->
+    <script>
+      fetch("header.html")
+        .then((res) => res.text())
+        .then((data) => (document.getElementById("header").innerHTML = data));
+
+      fetch("footer.html")
+        .then((res) => res.text())
+        .then((data) => (document.getElementById("footer").innerHTML = data));
+    </script>
+    <script>
+      function toggleMenu() {
+        var menu = document.getElementById("mobileMenu");
+
+        if (menu.style.display === "none" || menu.style.display === "") {
+          menu.style.display = "block";
+        } else {
+          menu.style.display = "none";
+        }
+      }
+    </script>
+  </body>
+</html>

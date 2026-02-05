@@ -1,0 +1,165 @@
+<!doctype html>
+<html>
+  <head>
+    <title>City Hospital | About Us</title>
+
+    <!-- Web Fonts -->
+    <link
+      rel="stylesheet"
+      href="//fonts.googleapis.com/css?family=Open+Sans:400,300,600&amp;subset=cyrillic,latin"
+    />
+
+    <!-- CSS Global -->
+    <link
+      rel="stylesheet"
+      href="assets/plugins/bootstrap/css/bootstrap.min.css"
+    />
+    <link rel="stylesheet" href="assets/css/style.css" />
+
+    <!-- Header & Footer CSS -->
+    <link rel="stylesheet" href="assets/css/header.css" />
+    <link rel="stylesheet" href="assets/css/footer.css" />
+
+    <!-- Plugins -->
+    <link rel="stylesheet" href="assets/plugins/line-icons-pro/styles.css" />
+    <link rel="stylesheet" href="assets/plugins/line-icons/line-icons.css" />
+    <link
+      rel="stylesheet"
+      href="assets/plugins/font-awesome/css/font-awesome.min.css"
+    />
+
+    <!-- Custom -->
+    <link rel="stylesheet" href="assets/css/custom.css" />
+  </head>
+
+  <body>
+    <div id="header"></div>
+
+    <div class="wrapper">
+      <!-- About Heading -->
+      <div class="container content-sm" style="margin-top: -25px">
+        <div class="headline-center" style="margin-bottom: 60px">
+          <h2>ABOUT <span style="color: #c0532c">City Hospital</span></h2>
+        </div>
+      </div>
+
+      <!-- About Section 1 -->
+      <div class="container content" style="margin-top: -90px">
+        <div class="row" style="margin-bottom: 40px">
+          <div class="col-md-6" style="margin-bottom: 40px">
+            <p>
+              <span style="color: #c0532c">City</span> Hospital is a multi/super
+              speciality hospital located at FC Road, Pune with state-of-the-art
+              facilities at affordable cost.
+            </p>
+
+            <ul class="list-unstyled">
+              <li>
+                <i class="fa fa-check color-green"></i> Multiple Treatment
+                Options
+              </li>
+              <li>
+                <i class="fa fa-check color-green"></i> Latest Technologies
+              </li>
+              <li>
+                <i class="fa fa-check color-green"></i> Best Hospital Award 2025
+              </li>
+              <li>
+                <i class="fa fa-check color-green"></i> 24/7 Ambulance Support
+              </li>
+              <li>
+                <i class="fa fa-check color-green"></i> Experienced Doctors
+              </li>
+            </ul>
+
+            <blockquote>
+              <p>
+                As a leading health organization, we focus on better health and
+                prevention starting from within our organization.
+              </p>
+              <small>CEO Amiya Kumar Dash</small>
+            </blockquote>
+          </div>
+
+          <div class="col-md-6">
+            <div class="responsive-video">
+              <iframe
+                src="https://player.vimeo.com/video/33787650"
+                allowfullscreen
+              ></iframe>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Vision Mission Values -->
+      <div class="container content-sm aboutSection">
+        <div class="row text-center">
+          <div class="col-md-4">
+            <h2>Vision</h2>
+            <p>Ensuring well-being as a humane commitment.</p>
+          </div>
+
+          <div class="col-md-4">
+            <h2>Mission</h2>
+            <p>Affordable, Safe, Professional and Ethical Healthcare.</p>
+          </div>
+
+          <div class="col-md-4">
+            <h2>Core Values</h2>
+            <p>Teamwork, Integrity, Compassion and Ethics.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Departments -->
+      <div class="bg-color-light">
+        <div class="container content-sm text-center">
+          <h2>OUR DEPARTMENTS</h2>
+          <p>300+ Beds | 45+ Super Specialties</p>
+
+          <div class="row">
+            <div class="col-md-4">
+              <h3>Cardiology</h3>
+              <p>Expert cardiac diagnosis & treatment.</p>
+            </div>
+
+            <div class="col-md-4">
+              <h3>Dermatology</h3>
+              <p>Skin & cosmetology specialists.</p>
+            </div>
+
+            <div class="col-md-4">
+              <h3>Neurology</h3>
+              <p>Advanced neuro care services.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div id="footer"></div>
+
+    <!-- Header & Footer Loader -->
+    <script>
+      fetch("header.html")
+        .then((res) => res.text())
+        .then((data) => (document.getElementById("header").innerHTML = data));
+
+      fetch("footer.html")
+        .then((res) => res.text())
+        .then((data) => (document.getElementById("footer").innerHTML = data));
+    </script>
+    <script>
+      function toggleMenu() {
+        var menu = document.getElementById("mobileMenu");
+
+        if (menu.style.display === "none" || menu.style.display === "") {
+          menu.style.display = "block";
+        } else {
+          menu.style.display = "none";
+        }
+      }
+    </script>
+  </body>
+</html>
