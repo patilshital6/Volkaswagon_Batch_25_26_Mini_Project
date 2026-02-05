@@ -1,0 +1,122 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Typing Performance Analyzer</title>
+
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="style.css" />
+  </head>
+
+  <body>
+    <header>
+      <div class="logo">Typing Test Kiosk</div>
+
+      <div class="header-right">
+        <div class="streak-badge">🔥 <span id="headerStreak">0</span></div>
+
+        <button id="themeToggle">🌙</button>
+
+        <nav>
+          <button data-page="home">Home</button>
+          <button data-page="test">Typing Test</button>
+          <button data-page="profile">Profile</button>
+          <button data-page="history">History</button>
+        </nav>
+      </div>
+    </header>
+
+    <section id="home" class="page active">
+      <div class="hero">
+        <h1>Typing Test Kiosk</h1>
+        <p>Analyze your typing speed with detailed analytics.</p>
+        <button id="startTestBtn">Start Typing Test</button>
+      </div>
+    </section>
+
+    <section id="test" class="page">
+      <div class="settings">
+        <select id="difficulty">
+          <option value="easy">Easy</option>
+          <option value="medium" selected>Medium</option>
+          <option value="hard">Hard</option>
+        </select>
+
+        <select id="test-time">
+          <option value="30">30 sec</option>
+          <option value="60" selected>60 sec</option>
+          <option value="120">120 sec</option>
+        </select>
+
+        <button id="pauseBtn">⏸ Pause</button>
+      </div>
+
+      <div class="progress-bar">
+        <div id="progress"></div>
+      </div>
+
+      <div id="typing-area" tabindex="0"></div>
+
+      <div class="stats">
+        <span>Time: <b id="time">60</b></span>
+        <span>WPM: <b id="wpm">0</b></span>
+        <span>Accuracy: <b id="accuracy">0</b>%</span>
+        <span>Mistakes: <b id="mistakes">0</b></span>
+      </div>
+    </section>
+
+    <!-- RESULT MODAL -->
+    <div id="result-modal" class="modal">
+      <div class="modal-content">
+        <h2>Test Summary</h2>
+        <p>WPM: <b id="finalWpm"></b></p>
+        <p>Accuracy: <b id="finalAccuracy"></b>%</p>
+        <p>Mistakes: <b id="finalMistakes"></b></p>
+
+        <h3>WPM Over Time</h3>
+        <canvas id="chart" width="500" height="250"></canvas>
+
+        <button id="restartBtn">Restart Test</button>
+      </div>
+    </div>
+
+    <section id="profile" class="page">
+      <h2>User Profile</h2>
+
+      <p>Total Tests: <b id="totalTests">0</b></p>
+      <p>Best WPM: <b id="bestWpm">0</b></p>
+      <p>Average WPM: <b id="avgWpm">0</b></p>
+
+      <p>🔥 Current Streak: <b id="currentStreak">0</b> days</p>
+      <p>🏆 Longest Streak: <b id="longestStreak">0</b> days</p>
+
+      <h3>Progress Over Attempts</h3>
+      <canvas id="profileChart" width="600" height="250"></canvas>
+    </section>
+
+    <section id="history" class="page">
+      <h2>Typing History</h2>
+      <table>
+        <thead>
+          <tr>
+            <th>Date</th>
+            <th>Difficulty</th>
+            <th>Time</th>
+            <th>WPM</th>
+            <th>Accuracy</th>
+            <th>Mistakes</th>
+          </tr>
+        </thead>
+        <tbody id="historyTable"></tbody>
+      </table>
+    </section>
+
+    <footer>Typing Test Kiosk</footer>
+
+    <script src="script.js"></script>
+  </body>
+</html>
