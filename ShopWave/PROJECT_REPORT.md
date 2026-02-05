@@ -2,21 +2,6 @@
 
 ## Final Project Completion Report
 
----
-
-| **Document Information** | |
-|--------------------------|-----------------------------------|
-| **Student Name** | Priyanshu Sharma |
-| **Role** | Developer / Project Trainee |
-| **Institution/Program** | B.Tech / MCA Program |
-| **Project Duration** | January 2026 – February 2026 |
-| **Guide/Mentor** | [Guide Name] |
-| **Submitted To** | [Department Name] |
-| **Document Version** | 1.0 |
-| **Date of Submission** | February 2026 |
-
----
-
 ## Executive Summary
 
 ShopWave represents a modern, production-ready e-commerce platform developed as a proof-of-concept for scalable digital retail solutions. Built entirely on the **MERN-adjacent stack** (MongoDB, Express.js, Node.js with vanilla JavaScript frontend), this project demonstrates enterprise-grade software engineering principles while maintaining the agility required for rapid feature iteration.
@@ -651,5 +636,3 @@ Sincere gratitude to the mentors for their guidance, the technical advisors for 
 
 ---
 
-**Document Classification**: Project Submission  
-**© 2026 Priyanshu. All Rights Reserved.**
