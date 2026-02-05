@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Daily Expense Tracker</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <!-- Header Section -->
+        <header class="header">
+            <div class="header-content">
+                <h1 class="title">💰 Expense Tracker</h1>
+                <p class="subtitle">Track your daily spending smartly</p>
+            </div>
+        </header>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <!-- Left: Form Section -->
+            <section class="form-section">
+                <div class="form-card">
+                    <h2 class="section-title">Add New Expense</h2>
+                    <form id="expenseForm" class="expense-form">
+                        <!-- Title Input -->
+                        <div class="form-group">
+                            <label for="title" class="form-label">Expense Title</label>
+                            <input 
+                                type="text" 
+                                id="title" 
+                                placeholder="e.g., Coffee, Gas, Rent" 
+                                required
+                                class="form-input"
+                            >
+                            <span class="form-error" id="titleError"></span>
+                        </div>
+
+                        <!-- Amount Input -->
+                        <div class="form-group">
+                            <label for="amount" class="form-label">Amount ($)</label>
+                            <input 
+                                type="number" 
+                                id="amount" 
+                                placeholder="0.00" 
+                                step="0.01" 
+                                min="0" 
+                                required
+                                class="form-input"
+                            >
+                            <span class="form-error" id="amountError"></span>
+                        </div>
+
+                        <!-- Date Input -->
+                        <div class="form-group">
+                            <label for="date" class="form-label">Date</label>
+                            <input 
+                                type="date" 
+                                id="date" 
+                                required
+                                class="form-input"
+                            >
+                            <span class="form-error" id="dateError"></span>
+                        </div>
+
+                        <!-- Category Select -->
+                        <div class="form-group">
+                            <label for="category" class="form-label">Category</label>
+                            <select id="category" required class="form-input form-select">
+                                <option value="">Select a category</option>
+                                <option value="Food">🍔 Food</option>
+                                <option value="Transport">🚗 Transport</option>
+                                <option value="Bills">📱 Bills</option>
+                                <option value="Other">🏷️ Other</option>
+                            </select>
+                            <span class="form-error" id="categoryError"></span>
+                        </div>
+
+                        <!-- Submit Button -->
+                        <button type="submit" class="btn btn-primary">
+                            <span>+ Add Expense</span>
+                        </button>
+                    </form>
+                </div>
+            </section>
+
+            <!-- Right: Expenses List Section -->
+            <section class="list-section">
+                <!-- Summary Card -->
+                <div class="summary-card">
+                    <div class="summary-item">
+                        <span class="summary-label">Total Today</span>
+                        <span class="summary-value" id="totalAmount">$0.00</span>
+                    </div>
+                    <div class="summary-item">
+                        <span class="summary-label">Expenses Count</span>
+                        <span class="summary-value" id="expenseCount">0</span>
+                    </div>
+                </div>
+
+                <!-- Expenses List -->
+                <div class="expenses-card">
+                    <div class="expenses-header">
+                        <h2 class="section-title">Today's Expenses</h2>
+                        <button id="refreshBtn" class="btn-icon" title="Refresh">🔄</button>
+                    </div>
+
+                    <!-- Loading State -->
+                    <div id="loadingState" class="loading-state" style="display: none;">
+                        <div class="spinner"></div>
+                        <p>Loading expenses...</p>
+                    </div>
+
+                    <!-- Empty State -->
+                    <div id="emptyState" class="empty-state">
+                        <div class="empty-icon">📊</div>
+                        <p class="empty-text">No expenses yet</p>
+                        <p class="empty-subtext">Add your first expense above to get started!</p>
+                    </div>
+
+                    <!-- Expenses List Container -->
+                    <div id="expensesList" class="expenses-list"></div>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <!-- Toast Notification -->
+    <div id="toast" class="toast"></div>
+
+    <script src="script.js"></script>
+</body>
+</html>
