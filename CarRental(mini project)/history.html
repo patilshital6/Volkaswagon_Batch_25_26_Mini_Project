@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Booking History | CarRental</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+  <style>
+    :root {
+      --brand-teal: #0d9488;
+      --brand-teal-dark: #0f766e;
+      --brand-slate: #1e293b;
+      --bg-soft: #f8fafc;
+    }
+
+    body {
+      background: var(--bg-soft);
+      font-family: system-ui, -apple-system, sans-serif;
+    }
+
+    .navbar {
+      background: linear-gradient(135deg, var(--brand-slate) 0%, #334155 100%) !important;
+      box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
+      height: 64px;
+      padding-top: 0;
+      padding-bottom: 0;
+    }
+
+    .navbar-brand img {
+      max-height: 120px;
+      width: auto;
+    }
+
+
+    .navbar-brand {
+      display: flex;
+      align-items: center;
+      height: 100%;
+    }
+
+    .nav-link {
+      font-weight: 500;
+    }
+
+    .page-title {
+      font-weight: 600;
+      color: var(--brand-slate);
+      margin-bottom: 1.5rem;
+    }
+
+    .history-card {
+      border: none;
+      border-radius: 16px;
+      box-shadow: 0 10px 40px rgba(15, 23, 42, 0.08);
+      overflow: hidden;
+      background: #fff;
+    }
+
+    .table {
+      margin-bottom: 0;
+    }
+
+    .table thead th {
+      background: linear-gradient(135deg, var(--brand-slate) 0%, #334155 100%);
+      color: #fff;
+      font-weight: 600;
+      padding: 1rem 0.75rem;
+      border: none;
+      font-size: 0.9rem;
+    }
+
+    .table tbody td {
+      padding: 1rem 0.75rem;
+      vertical-align: middle;
+      border-color: #f1f5f9;
+    }
+
+    .table tbody tr:hover {
+      background: #f8fafc;
+    }
+
+    .badge-booked {
+      background: #0d9488;
+    }
+
+    .badge-cancelled {
+      background: #94a3b8;
+    }
+
+    .empty-msg {
+      padding: 3rem 2rem;
+      text-align: center;
+      color: #64748b;
+    }
+
+    .empty-msg a {
+      color: var(--brand-teal);
+      font-weight: 500;
+    }
+
+    .profile-icon {
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.25);
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.1rem;
+    }
+
+    @media (max-width: 768px) {
+
+      .table thead th:nth-child(n+4),
+      .table tbody td:nth-child(n+4) {
+        font-size: 0.8rem;
+      }
+    }
+    body.dark {
+  --bg-soft: #0f172a;
+  --brand-slate: #020617;
+}
+  </style>
+  <script>
+    function getBookingKey() {
+      var email = localStorage.getItem('userEmail') || '';
+      return 'carBookings_' + email.replace(/[@.]/g, '_');
+    }
+
+    function loadHistory() {
+      if (localStorage.getItem('loggedIn') !== 'true') {
+        window.location.href = 'login.html?redirect=history.html';
+        return;
+      }
+      var key = getBookingKey();
+      var history = JSON.parse(localStorage.getItem(key)) || [];
+      var tbody = document.getElementById('body');
+      tbody.innerHTML = '';
+
+      if (history.length === 0) {
+        tbody.innerHTML = '<tr><td colspan="6" class="empty-msg">No bookings yet. <a href="cars.html">Browse cars</a> to book.</td></tr>';
+        return;
+      }
+
+      history.forEach(function (b) {
+        var pickupDt = (b.dateFrom || '–') + ' ' + (b.pickupTime || '–');
+        var dropDt = (b.dateTo || '–') + ' ' + (b.dropTime || '–');
+        if (!b.dateFrom) pickupDt = '–';
+        if (!b.dateTo) dropDt = '–';
+        var statusClass = (b.status === 'Booked') ? 'badge-booked' : 'badge-cancelled';
+        tbody.innerHTML +=
+          '<tr>' +
+          '<td><strong>' + (b.car || '–') + '</strong></td>' +
+          '<td>' + (b.days || '–') + '</td>' +
+          '<td>' + pickupDt + '</td>' +
+          '<td>' + dropDt + '</td>' +
+          '<td>₹' + (b.fare || '–') + '</td>' +
+          '<td><span class="badge ' + statusClass + '">' + (b.status || '–') + '</span></td>' +
+          '</tr>';
+      });
+    }
+
+    function logout() {
+      localStorage.removeItem('loggedIn');
+      localStorage.removeItem('userEmail');
+      localStorage.removeItem('userName');
+      localStorage.removeItem('userPhone');
+      window.location.href = 'index.html';
+    }
+
+    function initNav() {
+      if (localStorage.getItem('loggedIn') === 'true') {
+        document.getElementById('navLoginWrap').style.display = 'none';
+        document.getElementById('navProfileWrap').style.display = 'block';
+        document.getElementById('navHistoryWrap').style.display = 'block';
+        document.getElementById('profileName').textContent = localStorage.getItem('userName') || 'User';
+        document.getElementById('profileEmail').textContent = localStorage.getItem('userEmail') || '';
+        document.getElementById('profilePhone').textContent = localStorage.getItem('userPhone') || 'Not set';
+      } else {
+        document.getElementById('navHistoryWrap').style.display = 'none';
+        document.getElementById('navProfileWrap').style.display = 'none';
+      }
+    }
+    
+  </script>
+</head>
+
+<body onload="initNav(); loadHistory();">
+
+  <nav class="navbar navbar-expand-lg navbar-dark">
+    <div class="container-fluid">
+      <a class="navbar-brand" href="index.html"><img src="images/logo.png" alt="CarRental Logo"></a>
+      <button class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#nav">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse justify-content-end" id="nav">
+        <ul class="navbar-nav align-items-center">
+          <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
+          <li class="nav-item" id="navHistoryWrap" style="display:none;"><a class="nav-link active"
+              href="history.html">Booking History</a></li>
+          <li class="nav-item"><a class="nav-link" href="support.html">Support</a></li>
+          <li class="nav-item" id="navLoginWrap"><a class="nav-link" href="login.html">Login</a></li>
+          <li class="nav-item dropdown" id="navProfileWrap" style="display:none;">
+            <a class="nav-link dropdown-toggle d-flex align-items-center" href="#" data-bs-toggle="dropdown">
+              <span class="profile-icon">👤</span>
+            </a>
+            <ul class="dropdown-menu dropdown-menu-end">
+              <li><span class="dropdown-header fw-bold" id="profileName">–</span></li>
+              <li><span class="dropdown-item-text small" id="profileEmail">–</span></li>
+              <li><span class="dropdown-item-text small" id="profilePhone">–</span></li>
+              <li>
+                <hr class="dropdown-divider">
+              </li>
+              <li>
+  <a class="dropdown-item" href="profile.html">Edit Profile</a>
+</li>
+
+              <li><a class="dropdown-item" href="#" onclick="logout(); return false;">Logout</a></li>
+            </ul>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <div class="container mt-4 mb-5">
+    <h4 class="page-title">Booking History</h4>
+    <div class="history-card card">
+      <div class="table-responsive">
+        <table class="table table-bordered mb-0">
+          <thead>
+            <tr>
+              <th>Car</th>
+              <th>Days</th>
+              <th>Pickup date & time</th>
+              <th>Drop date & time</th>
+              <th>Fare</th>
+              <th>Status</th>
+            </tr>
+          </thead>
+          <tbody id="body"></tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+</body>
+
+</html>

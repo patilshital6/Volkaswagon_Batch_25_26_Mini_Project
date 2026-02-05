@@ -1,0 +1,383 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cars | CarRental</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+
+  <style>
+    :root {
+      --brand-teal: #0d9488;
+      --brand-teal-dark: #0f766e;
+      --brand-slate: #1e293b;
+      --bg-soft: #f8fafc;
+    }
+
+    body {
+      background: var(--bg-soft);
+      font-family: system-ui, -apple-system, sans-serif;
+    }
+
+    .navbar {
+      background: linear-gradient(135deg, var(--brand-slate), #334155);
+      height: 64px;
+    }
+
+    .navbar-brand img {
+      max-height: 120px;
+    }
+
+    .car-card {
+      border-radius: 16px;
+      overflow: hidden;
+      background: #fff;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+      transition: transform .2s, box-shadow .2s;
+      display: flex;
+      flex-direction: column;
+      height: 100%;
+    }
+
+    .car-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 12px 32px rgba(0, 0, 0, 0.12);
+    }
+
+    .card-img-wrap {
+      height: 200px;
+      background: #ffffff;
+    }
+
+    .card-img-wrap img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+    }
+
+    .card-body {
+      padding: 1.25rem;
+      display: flex;
+      flex-direction: column;
+      flex: 1;
+    }
+
+    .price {
+      font-weight: 700;
+      color: var(--brand-teal-dark);
+      margin-bottom: .75rem;
+    }
+
+    .btn-book {
+      background: linear-gradient(135deg, var(--brand-teal), var(--brand-teal-dark));
+      border: none;
+      border-radius: 10px;
+      margin-top: auto;
+      font-weight: 600;
+    }
+  </style>
+
+  <script>
+    function selectCar(name, price, img, type) {
+
+      if (localStorage.getItem("loggedIn") !== "true") return true;
+
+const email = localStorage.getItem("userEmail");
+
+
+      const key = "recentCars_" + email;
+
+      let recent = JSON.parse(localStorage.getItem(key)) || [];
+
+      recent = recent.filter(c => c.name !== name);
+
+      recent.unshift({ name, price, img, type });
+
+      recent = recent.slice(0, 5);
+
+      localStorage.setItem(key, JSON.stringify(recent));
+
+      localStorage.setItem('carName', name);
+      localStorage.setItem('pricePerDay', price);
+
+      if (localStorage.getItem('loggedIn') !== 'true') {
+        window.location.href = 'login.html?redirect=booking.html';
+        return false;
+      }
+
+      return true;
+    }
+
+
+    function loadRecentCars() {
+
+  if (localStorage.getItem("loggedIn") !== "true") return;
+
+  const email = localStorage.getItem("userEmail");
+  const key = "recentCars_" + email;
+
+  const recent = JSON.parse(localStorage.getItem(key)) || [];
+  if (recent.length === 0) return;
+
+  document.getElementById('recentSection').classList.remove('d-none');
+
+  document.getElementById('recentContainer').innerHTML =
+    recent.map(c => `
+      <div class="col-md-3 d-flex">
+        <div class="car-card w-100">
+          <div class="card-img-wrap"><img src="${c.img}"></div>
+          <div class="card-body">
+            <h6>${c.name}</h6>
+            <p class="price">₹${c.price} / day</p>
+            <a href="booking.html" class="btn btn-primary btn-book"
+              onclick="return selectCar('${c.name}',${c.price},'${c.img}','${c.type}')">Book</a>
+          </div>
+        </div>
+      </div>
+    `).join('');
+}
+
+
+    function filterCars() {
+      const type = document.getElementById('typeFilter').value
+      const price = document.getElementById('priceFilter').value
+      document.querySelectorAll('.car-item').forEach(car => {
+        const carType = car.dataset.type
+        const carPrice = parseInt(car.dataset.price)
+        let show = true
+        if (type && carType !== type) show = false
+        if (price && carPrice > price) show = false
+        car.classList.toggle('d-none', !show)
+      })
+    }
+
+    function initNav() {
+  if (localStorage.getItem('loggedIn') === 'true') {
+    document.getElementById('navLoginWrap').style.display = 'none';
+    document.getElementById('navProfileWrap').style.display = 'block';
+    document.getElementById('navHistoryWrap').style.display = 'block';
+
+    document.getElementById('profileName').textContent =
+      localStorage.getItem('userName') || 'User';
+
+    document.getElementById('profileEmail').textContent =
+      localStorage.getItem('userEmail') || '';
+
+    document.getElementById('profilePhone').textContent =
+      localStorage.getItem('userPhone') || 'Not set';
+  } else {
+    document.getElementById('navHistoryWrap').style.display = 'none';
+    document.getElementById('navProfileWrap').style.display = 'none';
+  }
+}
+
+    function logout() {
+  localStorage.removeItem('loggedIn');
+  localStorage.removeItem('userEmail');
+  localStorage.removeItem('userName');
+  localStorage.removeItem('userPhone');
+
+  window.location.href = 'index.html';
+}
+
+
+  </script>
+</head>
+
+<body onload="loadRecentCars(); initNav();">
+
+  <nav class="navbar navbar-expand-lg navbar-dark">
+    <div class="container-fluid">
+      <a class="navbar-brand" href="index.html"><img src="images/logo.png" alt="CarRental Logo"></a>
+      <button class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#nav">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse justify-content-end" id="nav">
+        <ul class="navbar-nav align-items-center">
+          <li class="nav-item"><a class="nav-link active" href="index.html">Home</a></li>
+          <li class="nav-item" id="navHistoryWrap" style="display:none;"><a class="nav-link" href="history.html">Booking
+              History</a></li>
+          <li class="nav-item"><a class="nav-link" href="support.html">Support</a></li>
+          <li class="nav-item" id="navLoginWrap"><a class="nav-link" href="login.html">Login</a></li>
+          <li class="nav-item dropdown" id="navProfileWrap" style="display:none;">
+            <a class="nav-link dropdown-toggle d-flex align-items-center" href="#" data-bs-toggle="dropdown">
+              <span class="profile-icon">👤</span>
+            </a>
+            <ul class="dropdown-menu dropdown-menu-end">
+              <li><span class="dropdown-header fw-bold" id="profileName">–</span></li>
+              <li><span class="dropdown-item-text small" id="profileEmail">–</span></li>
+              <li><span class="dropdown-item-text small" id="profilePhone">–</span></li>
+              <li>
+                <hr class="dropdown-divider">
+              </li>
+              <li>
+  <a class="dropdown-item" href="profile.html">Edit Profile</a>
+</li>
+
+              <li><a class="dropdown-item" href="#" onclick="logout(); return false;">Logout</a></li>
+            </ul>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <div class="container mt-4 mb-5">
+
+    <!-- RECENTLY VIEWED -->
+    <section id="recentSection" class="d-none mb-5">
+      <h5 class="fw-semibold mb-3">Recently Viewed Cars</h5>
+      <div class="row g-4" id="recentContainer"></div>
+    </section>
+
+    <!-- FILTERS -->
+    <div class="row mb-4">
+      <div class="col-md-3">
+        <select id="typeFilter" class="form-select" onchange="filterCars()">
+          <option value="">All Types</option>
+          <option>SUV</option>
+          <option>Sedan</option>
+          <option>Hatchback</option>
+        </select>
+      </div>
+      <div class="col-md-3">
+        <select id="priceFilter" class="form-select" onchange="filterCars()">
+          <option value="">All Prices</option>
+          <option value="2000">Below ₹2000</option>
+          <option value="3000">Below ₹3000</option>
+        </select>
+      </div>
+    </div>
+
+    <!-- ALL CARS -->
+    <div class="row g-4">
+
+      <div class="col-md-4 d-flex car-item" data-type="Hatchback" data-price="1400">
+        <div class="car-card w-100">
+          <div class="card-img-wrap"><img src="images/baleno.jpg"></div>
+          <div class="card-body">
+            <h5>Maruti Suzuki Baleno</h5>
+            <p class="price">₹1,400 / day</p>
+            <a href="booking.html" class="btn btn-primary btn-book"
+              onclick="return selectCar('Maruti Suzuki Baleno',1400,'baleno.jpg','Hatchback')">Book</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-4 d-flex car-item" data-type="Sedan" data-price="1500">
+        <div class="car-card w-100">
+          <div class="card-img-wrap"><img src="images/dzire.jpg"></div>
+          <div class="card-body">
+            <h5>Maruti Suzuki Dzire</h5>
+            <p class="price">₹1,500 / day</p>
+            <a href="booking.html" class="btn btn-primary btn-book"
+              onclick="return selectCar('Maruti Suzuki Dzire',1500,'dzire.jpg','Sedan')">Book</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-4 d-flex car-item" data-type="SUV" data-price="2000">
+        <div class="car-card w-100">
+          <div class="card-img-wrap"><img src="images/ertiga.jpg"></div>
+          <div class="card-body">
+            <h5>Maruti Suzuki Ertiga</h5>
+            <p class="price">₹2,000 / day</p>
+            <a href="booking.html" class="btn btn-primary btn-book"
+              onclick="return selectCar('Maruti Suzuki Ertiga',2000,'ertiga.jpg','SUV')">Book</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-4 d-flex car-item" data-type="SUV" data-price="2200">
+        <div class="car-card w-100">
+          <div class="card-img-wrap"><img src="images/gv.jpg"></div>
+          <div class="card-body">
+            <h5>Maruti Suzuki Grand Vitara</h5>
+            <p class="price">₹2,200 / day</p>
+            <a href="booking.html" class="btn btn-primary btn-book"
+              onclick="return selectCar('Maruti Suzuki Grand Vitara',2200,'gv.jpg','SUV')">Book</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-4 d-flex car-item" data-type="Sedan" data-price="2200">
+        <div class="car-card w-100">
+          <div class="card-img-wrap"><img src="images/virtus.jpg"></div>
+          <div class="card-body">
+            <h5>Volkswagen Virtus</h5>
+            <p class="price">₹2,200 / day</p>
+            <a href="booking.html" class="btn btn-primary btn-book"
+              onclick="return selectCar('Volkswagen Virtus',2200,'virtus.jpg','Sedan')">Book</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-4 d-flex car-item" data-type="SUV" data-price="2400">
+        <div class="car-card w-100">
+          <div class="card-img-wrap"><img src="images/taigun.png"></div>
+          <div class="card-body">
+            <h5>Volkswagen Taigun</h5>
+            <p class="price">₹2,400 / day</p>
+            <a href="booking.html" class="btn btn-primary btn-book"
+              onclick="return selectCar('Volkswagen Taigun',2400,'taigun.png','SUV')">Book</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-4 d-flex car-item" data-type="Sedan" data-price="2300">
+        <div class="car-card w-100">
+          <div class="card-img-wrap"><img src="images/slavia.jpg"></div>
+          <div class="card-body">
+            <h5>Skoda Slavia</h5>
+            <p class="price">₹2,300 / day</p>
+            <a href="booking.html" class="btn btn-primary btn-book"
+              onclick="return selectCar('Skoda Slavia',2300,'slavia.jpg','Sedan')">Book</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-4 d-flex car-item" data-type="SUV" data-price="2500">
+        <div class="car-card w-100">
+          <div class="card-img-wrap"><img src="images/kushaq.jpg"></div>
+          <div class="card-body">
+            <h5>Skoda Kushaq</h5>
+            <p class="price">₹2,500 / day</p>
+            <a href="booking.html" class="btn btn-primary btn-book"
+              onclick="return selectCar('Skoda Kushaq',2500,'kushaq.jpg','SUV')">Book</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-4 d-flex car-item" data-type="Sedan" data-price="4500">
+        <div class="car-card w-100">
+          <div class="card-img-wrap"><img src="images/a4.jpg"></div>
+          <div class="card-body">
+            <h5>Audi A4</h5>
+            <p class="price">₹4,500 / day</p>
+            <a href="booking.html" class="btn btn-primary btn-book"
+              onclick="return selectCar('Audi A4',4500,'a4.jpg','Sedan')">Book</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-4 d-flex car-item" data-type="SUV" data-price="5000">
+        <div class="car-card w-100">
+          <div class="card-img-wrap"><img src="images/q3.jpg"></div>
+          <div class="card-body">
+            <h5>Audi Q3</h5>
+            <p class="price">₹5,000 / day</p>
+            <a href="booking.html" class="btn btn-primary btn-book"
+              onclick="return selectCar('Audi Q3',5000,'q3.jpg','SUV')">Book</a>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+
+</body>
+
+</html>
