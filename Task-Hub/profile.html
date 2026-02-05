@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Profile</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="css/style.css" rel="stylesheet">
+</head>
+<body>
+
+<div class="center-card">
+  <div class="card p-4">
+    <h3>Profile</h3>
+    
+    <label>Name</label>
+    <input id="profileName" class="form-control mb-2">
+
+    <label>Email (cannot change)</label>
+    <input id="profileEmail" class="form-control mb-2" disabled>
+
+    <label>Password</label>
+    <input id="profilePassword" type="password" class="form-control mb-2">
+
+    <button class="btn btn-success w-100 mb-2" onclick="updateProfile()">Update Profile</button>
+    <button class="btn btn-danger w-100" onclick="logout()">Logout</button>
+  </div>
+</div>
+
+<script>
+let currentUser = JSON.parse(localStorage.getItem("currentUser"));
+
+if(currentUser){
+  document.getElementById("profileName").value = currentUser.name;
+  document.getElementById("profileEmail").value = currentUser.email;
+  document.getElementById("profilePassword").value = currentUser.password;
+}
+
+function updateProfile() {
+  let name = document.getElementById("profileName").value;
+  let password = document.getElementById("profilePassword").value;
+
+  if(!name || !password){
+    return alert("Name and Password cannot be empty");
+  }
+
+  let users = JSON.parse(localStorage.getItem("users")) || [];
+  let userIndex = users.findIndex(u => u.email === currentUser.email);
+
+  users[userIndex].name = name;
+  users[userIndex].password = password;
+
+  localStorage.setItem("users", JSON.stringify(users));
+
+  // Update current user
+  currentUser.name = name;
+  currentUser.password = password;
+  localStorage.setItem("currentUser", JSON.stringify(currentUser));
+
+  alert("Profile updated successfully!");
+}
+
+function logout() {
+  localStorage.removeItem("currentUser");
+  location.href = "index.html";
+}
+</script>
+</body>
+</html>
